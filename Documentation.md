@@ -1,5 +1,5 @@
 # 🐝Documentation🐝
-This
+This document gives you a quick look at how ArtHive: Where Creativity is a Buzz is being built. You'll find our project timeline, database structure, and design ideas that show how we’re creating this platform to connect artists worldwide. Check out the Gantt Chart, ERD, and UI/UX design for more details!
 
 ### 🍯Gantt Chart
 [View Gantt Chart](https://docs.google.com/spreadsheets/d/1j7-l3Pg0_pDRopDBsGIzHMEpQqL48mMImbEehVLf0Lw/edit?usp=sharing)
