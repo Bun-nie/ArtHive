@@ -5,17 +5,17 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 # Prgrmr: Alimurung
 
-@login_required(login_url='base: login')
+@login_required(login_url='login')
 def gallery(request):
     user = request.user
     category = request.GET.get('category')
 
     if category == None:
-        artworks = Artwork.objects.filter(category__user = user)
+        artworks = Artwork.objects.all()
     else:
         artworks = Artwork.objects.filter(category__name = category, category__user = user)
 
-    categories = Category.objects.filter(user=user)
+    categories = Category.objects.all()
     context = {'categories': categories, 'artworks': artworks}
     return render(request, 'homepage/gallery.html', context)
 
@@ -27,29 +27,40 @@ def viewArtwork(request, pk):
 @login_required(login_url='base: login')
 def addArtwork(request):
     user = request.user
-    categories = user.category_set.all()
+    categories = Category.objects.all()
     
     if request.method == 'POST':
         data = request.POST
         artworks = request.FILES.getlist('images', False)
 
-        if data['category'] != 'none':
+        # if data['category'] != 'none':
+        #     category = Category.objects.get(id=data['category'])
+        # elif data['category_new'] != ' ':
+        #     category, created = Category.objects.get_or_create(
+        #         user = user, 
+        #         name = data['category_new'])
+        # else:
+        #     pass
+
+        category_new = data.get('category_new', '')
+        if data.get('category') != 'none':
             category = Category.objects.get(id=data['category'])
-        elif data['category_new'] != ' ':
+        elif category_new.strip():
             category, created = Category.objects.get_or_create(
-                user = user, 
-                name = data['category_new'])
+                user=user,
+                name=category_new
+            )
         else:
-            category = None
+            category = None        
 
         # aw stands for artwork. i can't make another variable using 'artwork' as it is being used inside the for loop  
         for aw in artworks:
             artwork = Artwork.objects.create(
                 category = category,
-                description = data['description',],
-                aw = aw,
+                description = data['description'],
+                artwork = aw,
             )
-        return redirect('gallery')
+        return redirect('homepage:gallery')
 
     context = {'categories': categories}
     return render(request, 'homepage/add.html', context)

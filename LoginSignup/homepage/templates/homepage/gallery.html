@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+ <!-- Prgrmr: Alimurung -->
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -38,17 +39,17 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <a href="{% url 'gallery' %}">All</a>
+                                <a href="{% url 'homepage:gallery' %}">All</a>
                             </li>
                             {% for category in categories %}
                             <li class="list-group-item">
-                                <a href="{% url 'gallery' %}?category={{category.name}}">
+                                <a href="{% url 'homepage:gallery' %}?category={{category.name}}">
                                     {{category.name}}
                                 </a>
                             </li>
                             {% endfor %}
 
-                            <a href="{% url 'add_artwork' %}" class="btn btn-dark btn-block btn-sm m-1">Upload Artwork</a>
+                            <a href="{% url 'homepage:add_artwork' %}" class="btn btn-dark btn-block btn-sm m-1">Upload Artwork</a>
                         </ul>
                     </div>
 
@@ -59,9 +60,15 @@
                         {% for artwork in artworks %}
                         <div class="col-md-4">
                             <div class="card my-2">
-                                <img class="image-thumbnail" src="{{artwork.}}" alt="">
+                                <img class="image-thumbnail" src="{{artworks.image_url}}" alt="Artwork">
+                                <div class="card-body">
+                                    <small>Category: {{artworks.category.name}}</small>
+                                </div>
+                                <a href="{% url 'homepage:view_artwork' artwork.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                             </div>
                         </div>
+                        {% empty %}
+                        <h3>No artworks uploaded</h3>
                         {% endfor %}
                     </div>
                 </div>

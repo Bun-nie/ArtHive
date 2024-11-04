@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- adding photos for the homepage -->
+ <!-- Prgrmr: Alimurung -->
 <html>
     <head>
         <meta charset="utf-8">
@@ -19,7 +20,7 @@
 
                 <div class="col-md-4">
 
-                    <a href="{% url 'gallery' %}" class="btn btn-dark my-3">Back</a>
+                    <a href="{% url 'homepage:gallery' %}" class="btn btn-dark my-3">Back</a>
                     <div class="card">
 
                         <form method="POST" action="" enctype="multipart/form-data">
@@ -45,7 +46,7 @@
                             <!-- create a new category for artwork -->
                             <div class="form-group m-3">
                                 <label>Create a new category</label>
-                                <input type="category_new" type="file" multiple class="form-control-file">
+                                <input type="text" name="category_new" placeholder="Create a new category" class="form-control-file">
                             </div>
 
                             <!-- upload image of artwork -->
