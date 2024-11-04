@@ -23,13 +23,13 @@ class Artwork(models.Model):
         Category, on_delete=models.CASCADE, null=True, blank=True
     )
 
-    artwork = models.ImageField(null=False, blank=False)
+    artwork = models.ImageField(null=False, blank=False, upload_to='artmedia/')
     description = models.TextField()
 
     @property
     def image_url(self):
         try:
-            url = self.image_url
+            url = self.artwork.url
         except:
             url = ''
         return url
