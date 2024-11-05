@@ -1,3 +1,6 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
  <!-- Prgrmr: Alimurung -->
 <html lang="en">
@@ -8,20 +11,9 @@
         <title>Homepage</title>
 
         <!-- css -->
+         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">         
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-         <style>
-            .image-thumbnail{
-                height: 200px;
-                object-fit: cover;
-            }
-
-            .list-group-item a{
-                text-decoration: none;
-                color: black;
-            }
-         </style>
     </head>
     <body class="m-5">
         
@@ -60,7 +52,7 @@
                         {% for artwork in artworks %}
                         <div class="col-md-4">
                             <div class="card my-2">
-                                <img class="image-thumbnail" src="{{artworks.image_url}}" alt="Artwork">
+                                <img class="image-thumbnail" src="{{artwork.image_url}}" alt="Artwork">
                                 <div class="card-body">
                                     <small>Category: {{artworks.category.name}}</small>
                                 </div>
@@ -76,3 +68,4 @@
         </div>
     </body>
 </html>
+{% endblock content %}
