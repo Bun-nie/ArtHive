@@ -1,12 +1,11 @@
 from django.urls import include, path
-from django.contrib.auth  import views as authView
-from . import views
+from .views import gallery, viewArtwork, addArtwork
 
 app_name = 'base'
 
 urlpatterns = [
-    path(' ', views.gallery, name='gallery'),
-    # path('homepage/', views.gallery, name='homepage'),    
-    path('views/', views.viewArtwork, name='view_artwork'),
-    path('add/', views.addArtwork, name='add_artwork')
+    path('', gallery, name='gallery'),
+    # path('homepage/', views.gallery, name='gallery'),
+    path('views/<int:pk>/', viewArtwork, name='view_artwork'),
+    path('add/', addArtwork, name='add_artwork')
 ]

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 # Prgrmr: Alimurung
 
-@login_required(login_url='login')
+@login_required(login_url='base: login')
 def gallery(request):
     user = request.user
     category = request.GET.get('category')
@@ -16,8 +16,8 @@ def gallery(request):
         artworks = Artwork.objects.filter(category__name = category, category__user = user)
 
     categories = Category.objects.all()
-    context = {'categories': categories, 'artworks': artworks}
-    return render(request, 'homepage/gallery.html', context)
+    # context = {'categories': categories, 'artworks': artworks}
+    return render(request, 'homepage/gallery.html', {'categories': categories, 'artworks': artworks})
 
 @login_required(login_url='base: login')
 def viewArtwork(request, pk):
@@ -60,7 +60,7 @@ def addArtwork(request):
                 description = data['description'],
                 artwork = aw,
             )
-        return redirect('homepage:gallery')
+        return redirect('base:gallery')
 
     context = {'categories': categories}
     return render(request, 'homepage/add.html', context)
