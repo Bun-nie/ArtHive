@@ -11,7 +11,7 @@ from django.contrib import messages
 # cleaned code from the previous 
 @login_required
 def home(request):
-    return render(request, "home.html", {})
+    return render(request, "homepage/gallery.html", {})
 
 # for authorization
 def authView(request):
