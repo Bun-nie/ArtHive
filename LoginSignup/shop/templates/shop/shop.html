@@ -6,14 +6,13 @@
 
 <div class="row">
     {% for product in products %}
-    <div class="col-lg-4" >
-        <img class="thumbnail" src="{{product.image_url}}" style="width: 150px; align-self: center; justify-self: center;">
-        <div class="box-element product">
+    <div class="col-lg-4" style="display: flex; align-items: center; justify-content: space-between; height: 200px">
+        <img class="thumbnail" src="{{product.image_url}}" style="width: 150px; height: 200px; align-self: center; justify-self: center;">
+        <div class="box-element product" style="height: 200px">
             <h6><strong>{{product.name}}</strong></h6>
             <hr>
-            <button data-product="{{product.id}}" data-action="add" class="btn btn-warning me-3 add-btn update-cart">Add to Cart</button>
-            <a href="#" class="btn btn-outline-secondary me-3">View</a>
-            <h4 style="display: inline-block; float: right"><strong>Php{{product.price|floatformat:2}}</strong></h4>
+            <h4 style="display: inline-block;"><strong>Php{{product.price|floatformat:2}}</strong></h4>
+            <button style="margin: 10px" data-product="{{product.id}}" data-action="add" class="yellow-button add-btn update-cart">Add to Cart</button>
         </div>
     </div>
     {% endfor %}

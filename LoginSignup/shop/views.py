@@ -3,6 +3,8 @@ import datetime
 
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import *
 
 
@@ -74,6 +76,7 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+@csrf_exempt
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
