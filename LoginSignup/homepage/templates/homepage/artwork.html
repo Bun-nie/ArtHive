@@ -1,4 +1,6 @@
+{% extends 'shop/main.html' %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
  <!-- Prgrmr: Alimurung -->
 <html>
@@ -9,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- for css -->
     </head>
-    <body class="m-5">
+    <body>
         <div class="container">
 
             <div class="row justify-content-center">
@@ -25,6 +27,21 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <h2>Comments</h2>
+            {% if not artwork.comments.all %}
+                No comments yet... <a href='#'>
+                Comment</a>
+            {% else %}
+                    {% for comment in artwork.comments.all %}
+                        <strong>
+                            {{ comment.name }} - 
+                            {{ comment.date_added }}
+                        </strong>
+                    {% endfor %}
+            {% endif %}
+        </div>
     </body>
 
 </html>
+{% endblock content %}

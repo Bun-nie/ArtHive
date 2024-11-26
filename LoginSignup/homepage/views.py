@@ -64,3 +64,8 @@ def addArtwork(request):
 
     context = {'categories': categories}
     return render(request, 'homepage/add.html', context)
+
+@login_required
+def addComment(request):
+    context = {'comments': comments}
+    return render(request, 'homepage/artwork.html', context)
