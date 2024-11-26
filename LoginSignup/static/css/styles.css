@@ -24,6 +24,13 @@ h1,h2,h3,h4,h5,h6{
     box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
 }
 
+.logo-container {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .product{
 	border-radius: 0 0 4px 4px;
 }
@@ -123,6 +130,6 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .yellow-button:hover {
-	background-color: transparent;
+	background-color: #1E2329;
   	color: #ffc107;
 }

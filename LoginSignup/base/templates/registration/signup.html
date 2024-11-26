@@ -1,14 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <div class="shadow-wrap">
     <div class="form-wrap">
-        <h3>Signup</h3>
+        <img class="logo-container" src="{% static 'resources/Logo.png' %}" style="height: 150px;">
+        <h3 style="color: #FFFFFF; align-self: center; justify-self: center; font-weight: 900; font-size: 30px">Join The Colony!</h3>
+        <hr>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Sign Up</button>
+            <br>
+            <button class="yellow-button" type="submit">Sign Up</button>
         </form>
-        <p>Already have an account? <a class="signup-link" href='{% url "login" %}'>Log In</a></p>
+        <br>
+        <p style="color: #FED154">Already have an account?&nbsp&nbsp&nbsp<a style="color: #FED154" href='{% url "login" %}'>Log In</a></p>
     </div>
 </div>
 {% endblock content %}

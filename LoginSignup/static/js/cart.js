@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.hasCartLoaded) return;
     window.hasCartLoaded = true;
     var updateBtns = document.getElementsByClassName('add-btn');
-
+    var loginUrl = "{% url 'login' %}";
     if (updateBtns.length > 0) {
         console.log('updateBtns is not null and has items');
         for (var i = 0; i < updateBtns.length; i++) {
@@ -13,6 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('USER:', user)
                 if(user === 'AnonymousUser'){
                     console.log('User is not Authenticated')
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Log In First!",
+                        confirmButtonText: "Go to Login",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to homepage
+                            window.location.href = "/";
+                        }
+                    });
                 } else {
                     updateUserOrder(productId,action)
                 }
