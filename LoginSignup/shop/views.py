@@ -12,7 +12,7 @@ from .models import *
 
 def shop(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -26,7 +26,7 @@ def shop(request):
 
 def cart(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -40,7 +40,7 @@ def cart(request):
 
 def checkout(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -59,7 +59,7 @@ def updateItem(request):
     print('Action:', action)
     print('Product:', productId)
 
-    customer = request.user.customer
+    customer = request.user
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
@@ -82,7 +82,7 @@ def processOrder(request):
     data = json.loads(request.body)
 
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         total = float(data['form']['total'])
         order.transaction_id = transaction_id

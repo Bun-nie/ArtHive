@@ -8,7 +8,30 @@
         <hr>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label>
+                {{ form.firstname }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.lastname.id_for_label }}">{{ form.lastname.label }}</label>
+                {{ form.lastname }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                {{ form.password }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.confirm_password.id_for_label }}">{{ form.confirm_password.label }}</label>
+                {{ form.confirm_password }}
+            </div>
             <br>
             <button class="yellow-button" type="submit">Sign Up</button>
         </form>
