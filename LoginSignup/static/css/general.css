@@ -7,7 +7,7 @@
     background-color: #2A2F35;
     color: #FFFFFF;
 }
-    body {
+    .body-container {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -17,6 +17,13 @@
         color: #FFFFFF;
         background-color: #2A2F35;
     }
+
+    nav{
+        background-color: #1E2329;
+        align-content: center;
+        height: 60px;
+    }
+
     .shadow-wrap{
         width: 700px;
         grid-area: 1 / 1 / 5 / 5;

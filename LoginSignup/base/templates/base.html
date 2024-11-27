@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{% static 'css/general.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     </head>
-    <body style="background-image: url('{% static "resources/background.png" %}'); background-size: cover; background-repeat: no-repeat">
+    <body class="body-container" style="background-image: url('{% static "resources/background.png" %}'); background-size: cover; background-repeat: no-repeat">
         {% block content %}{% endblock content %}
     </body>
 </html>

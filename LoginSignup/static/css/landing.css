@@ -1,0 +1,52 @@
+/* Global styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E2329;
+  padding: 20px 40px;
+  box-shadow: 0px 1px 5px rgba(255, 255, 255, 0.6);
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero-text h1 {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-bar input {
+  width: 700px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
+}

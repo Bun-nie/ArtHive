@@ -13,6 +13,12 @@ from django.contrib import messages
 def home(request):
     return render(request, "homepage/gallery.html", {})
 
+def landing(request):
+    return render(request, "landing.html", {})
+
+def aboutUs(request):
+    return render(request, "about.html", {})
+
 # for authorization
 def authView(request):
     if request.method == "POST":
