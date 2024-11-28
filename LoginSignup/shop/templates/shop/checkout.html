@@ -135,8 +135,16 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log('Success:', data);
-                    alert('Transaction completed');
-                    window.location.href = "{% url 'shop' %}"
+                    Swal.fire({
+                        icon: "success",
+                        title: "Yey!",
+                        text: "Transaction Completed",
+                        confirmButtonText: "Back to Shop",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{% url 'shop' %}";
+                        }
+                    });
                 })
         }
     </script>

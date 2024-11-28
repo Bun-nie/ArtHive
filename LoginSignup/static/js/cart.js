@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         confirmButtonText: "Go to Login",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Redirect to homepage
                             window.location.href = "/";
                         }
                     });
