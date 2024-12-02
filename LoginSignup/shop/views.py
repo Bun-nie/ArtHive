@@ -1,10 +1,11 @@
 import json
 import datetime
 
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from .forms import *
 from .models import *
 
 
@@ -104,3 +105,23 @@ def processOrder(request):
     else:
         print('User not logged in')
     return JsonResponse('Payment submitted..', safe=False)
+
+
+def render_product_form(request):
+    user = get_object_or_404(User, id=request.user.id)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST,request.FILES)
+        if form.is_valid():
+            report = form.save(commit=False)
+            report.user = user
+            report.save()
+            return redirect('shop')
+    else:
+        form = ProductForm()
+    return render(request, 'product_form.html', {'form': form})
+
+def view_product(request, product_id):
+
+    product = get_object_or_404(Product, id=product_id)
+    return render(request,"view_product.html",{'product':product})
