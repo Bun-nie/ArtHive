@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
-from .models import Category, Artwork
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Category, Artwork, Comments
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from homepage.forms import CommentForm
+from django.views.generic.edit import UpdateView, DeleteView
 
 # Create your views here.
 # Prgrmr: Alimurung
@@ -9,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 def gallery(request):
     user = request.user
     category = request.GET.get('category')
-
+    
     if category == None:
         artworks = Artwork.objects.all()
     else:
@@ -21,8 +24,15 @@ def gallery(request):
 
 @login_required(login_url='base: login')
 def viewArtwork(request, pk):
-    artwork = Artwork.objects.get(id=pk)
-    return render(request, 'homepage/artwork.html', {'artwork': artwork})
+    artwork_post = Artwork.objects.get(id=pk)
+    form = CommentForm()
+    context = {
+        'artwork_post' : artwork_post,
+        'form' : form,
+    }
+    # comment_section = Comments.objects.get(id=pk)
+
+    return render(request, 'homepage/artwork.html', context)
 
 @login_required(login_url='base: login')
 def addArtwork(request):
@@ -32,15 +42,6 @@ def addArtwork(request):
     if request.method == 'POST':
         data = request.POST
         artworks = request.FILES.getlist('images', False)
-
-        # if data['category'] != 'none':
-        #     category = Category.objects.get(id=data['category'])
-        # elif data['category_new'] != ' ':
-        #     category, created = Category.objects.get_or_create(
-        #         user = user, 
-        #         name = data['category_new'])
-        # else:
-        #     pass
 
         category_new = data.get('category_new', '')
         if data.get('category') != 'none':
@@ -66,6 +67,33 @@ def addArtwork(request):
     return render(request, 'homepage/add.html', context)
 
 @login_required
-def addComment(request):
-    context = {'comments': comments}
-    return render(request, 'homepage/artwork.html', context)
+def artworkPostEditView(request, pk):
+    artwork = get_object_or_404(Artwork, pk=pk)
+    if request.method == "POST":
+
+        body = request.POST.get('body', '')
+        if body:
+            artwork.description = body
+            artwork.save()
+            return redirect(reverse_lazy('viewArtwork', kwargs = {'pk':pk}))    
+        
+    return render(request, 'homepage/edit_post.html', {'artwork':artwork})
+    
+    
+    
+    # model = Artwork 
+    # fields = ['body']
+    # template_name = 'homepage/edit_post.html'
+
+    # def get_success_url(self):
+    #    pk = self.kwargs['pk']
+    #    return reverse_lazy('viewArtwork', kwargs = {'pk':pk})
+
+# first draft
+# @login_required
+# def addComment(request, pk, artwork):
+#     user = request.user
+#     comments = Comments.objects.get(id=pk)
+    
+#     context = {'comments': comments}
+#     return render(request, 'homepage/artwork.html', context)

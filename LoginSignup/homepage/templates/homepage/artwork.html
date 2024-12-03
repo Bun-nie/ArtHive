@@ -1,5 +1,5 @@
 {% extends 'shop/main.html' %}
-{% load static %}
+{% load static %} 
 {% block content %}
 <!DOCTYPE html>
  <!-- Prgrmr: Alimurung -->
@@ -22,26 +22,28 @@
                     <div style="height: 90vh;">
                         <img class="thumbnail" style="max-width: 100%; max-height: 100%;" alt="empty-photo-box" src="{{ artwork.image_url }}">
                         <p>{{ artwork.description }}</p>
+                        <button><a href="#">Edit</a></button>
                     </div>
                     <a href="" class="btn btn-dark my-3">Delete</a>
+                    <button type="submit", name="artwork_id", value="{{ artwork.id }}", class="btn btn-sm">Like</button>
                 </div>
             </div>
         </div>
         <div class="container">
             <h2>Comments</h2>
             {% if not artwork.comments.all %}
-                No comments yet... <a href='#'>
+                No comments yet... <a href="#">
                 Comment</a>
             {% else %}
-                    {% for comment in artwork.comments.all %}
-                        <strong>
-                            {{ comment.name }} - 
-                            {{ comment.date_added }}
-                        </strong>
-                    {% endfor %}
+                <a href="#">Add Comment</a>
+                <br></br>
+                        {% for comment in artwork.comments.all %}
+                            <strong>
+                                {{ comment.name }} - {{ comment.date_added }}
+                            </strong>
+                        {% endfor %}
             {% endif %}
         </div>
     </body>
-
 </html>
 {% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Add Comment...</h1>
+        <br/><br/>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p %}}
+                
+            </form>
+
+        </div>
+    </body>
+</html>
+{% endblock content %}

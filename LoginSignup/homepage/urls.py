@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import gallery, viewArtwork, addArtwork
+from .views import gallery, viewArtwork, addArtwork 
 
 app_name = 'base'
 
@@ -8,4 +8,6 @@ urlpatterns = [
     # path('homepage/', views.gallery, name='gallery'),
     path('views/<int:pk>/', viewArtwork, name='view_artwork'),
     path('add/', addArtwork, name='add_artwork')
+    # path('views/<int:pk>/comment/', addComment, name='add_comment')
+    # path()
 ]
