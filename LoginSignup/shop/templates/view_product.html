@@ -4,13 +4,42 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-<div class="view-product">
-    <p>Product ID: {{ product.id }}</p><br>
-    <p>Product maker: {{ product.user.username }}</p><br>
-    <p>Product name: {{ product.name }}</p><br>
-    <p>Product price: {{ product.price }}</p><br>
-    <p>Product isDigital: {{ product.digital }}</p><br>
-    <img src="/artmedia/{{ product.image }}">
+<a href="{% url 'shop' %}" style="margin-left: 320px">
+    <button class="yellow-button" style="align-self: center; justify-self: center">
+        &#x2190;&nbspContinue Shopping
+    </button>
+</a>
+<div class="product-card">
+
+    <div class="image-section">
+      <img src="/artmedia/{{ product.image }}" alt="Product Image">
+    </div>
+    <div class="info-section">
+      <div class="price">₱ {{ product.price }}</div>
+        <hr>
+      <div class="title">{{ product.name }}</div>
+        <hr>
+      <div class="description">
+        {{ product.description }}
+      </div>
+      <div>
+        <button style="margin: 10px" data-product="{{product.id}}" data-action="add" class="yellow-button add-btn update-cart">Add to Cart</button>
+        <button class="yellow-button">Buy Now</button>
+      </div>
+    </div>
+    <div class="rating-section">
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="score">5.0</span>
+      </div>
+    </div>
+    <div class="seller-section">
+      <img src="seller-profile.jpg" alt="Seller Profile">
+      <div class="info">
+        <div class="name"><p>{{ product.user.username }}</p></div>
+        <a href="#">View Shop</a> | <a href="#">Message Seller</a>
+      </div>
+    </div>
 </div>
 
 
