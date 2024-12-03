@@ -79,11 +79,12 @@ def updateItem(request):
 
 @csrf_exempt
 def processOrder(request):
+    user = get_object_or_404(User, id=request.user.id)
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
     if request.user.is_authenticated:
-        customer = request.user
+        customer = user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         total = float(data['form']['total'])
         order.transaction_id = transaction_id
