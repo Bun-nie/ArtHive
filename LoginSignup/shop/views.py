@@ -114,11 +114,13 @@ def render_product_form(request):
     if request.method == 'POST':
         form = ProductForm(request.POST,request.FILES)
         if form.is_valid():
+            print('Form Valid')
             report = form.save(commit=False)
             report.user = user
             report.save()
             return redirect('shop')
     else:
+        print('Form Not Valid')
         form = ProductForm()
     return render(request, 'product_form.html', {'form': form})
 

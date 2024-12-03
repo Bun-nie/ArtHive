@@ -11,21 +11,27 @@ class ProductForm(forms.ModelForm):
     """
     class Meta:
         model = Product
-        fields = ['name','price','digital','image']
+        fields = ['name','price','description','image']
         widgets = {
             'name': forms.Textarea(
                 attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Enter name of product here',
+                    'class': 'input-field',
+                    'placeholder': 'Name of Listing',
+                    'rows': 1
+                }
+            ),
+            'price': forms.TextInput(
+                attrs={
+                    'class': 'input-field',
+                    'placeholder': 'Price'
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'input-field',
+                    'placeholder': 'Product Description',
                     'rows': 4
                 }
             ),
-            'price': forms.TextInput(),
-            'digital': forms.CheckboxInput(),
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-        }
-        labels = {
-            'name': 'Product name',
-            'price': 'Product price',
-            'digital': 'Product digital',
+            'image': forms.ClearableFileInput(attrs={'class': 'image-field'}),
         }
