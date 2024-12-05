@@ -1,12 +1,14 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm
 from django.contrib import messages
 
 # Create your views here.
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # for login
 # cleaned code from the previous 
 @login_required
@@ -46,7 +48,7 @@ def authView(request):
                     )
                     user.save()
 
-                # if registration is a success. 
+                # if registration is a success.
                 # redirects to login page
                 messages.success(request, 'Profile registered successfully! You can now log in')
                 return redirect("login")
@@ -54,6 +56,7 @@ def authView(request):
                 messages.error(request, 'Passwords do not match!')
     else:
         form = SignUpForm()
-    
+
     return render(request, "registration/signup.html", {"form": form})
+
 

@@ -1,6 +1,7 @@
 import json
 import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -10,7 +11,8 @@ from .models import *
 
 
 # Create your views here.
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 def shop(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -79,7 +81,7 @@ def updateItem(request):
 
 @csrf_exempt
 def processOrder(request):
-    user = get_object_or_404(User, id=request.user.id)
+    user = get_object_or_404(settings.AUTH_USER_MODEL, id=request.user.id)
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
@@ -107,7 +109,7 @@ def processOrder(request):
         print('User not logged in')
     return JsonResponse('Payment submitted..', safe=False)
 
-
+@login_required(login_url='login')
 def render_product_form(request):
     user = get_object_or_404(User, id=request.user.id)
 

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 # Prgrmr: Alimurung
 
-@login_required(login_url='base: login')
+@login_required(login_url='login')
 def gallery(request):
     user = request.user
     category = request.GET.get('category')

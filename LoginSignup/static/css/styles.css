@@ -28,7 +28,7 @@ h1,h2,h3,h4,h5,h6{
 .logo-container {
     display: flex;
     justify-self: center;
-    align-items: center;
+    align-self: center;
     margin-bottom: 20px;
 }
 
@@ -282,10 +282,15 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .seller-section .info a {
-  color: #ffd700; /* Gold links */
+  color: #ffd700;
   text-decoration: none;
 }
 
 .seller-section .info a:hover {
   text-decoration: underline;
+}
+
+.swal-background {
+	background-color: #1E2329;
+	color: #FFFFFF;
 }

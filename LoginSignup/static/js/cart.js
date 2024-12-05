@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         title: "Oops...",
                         text: "Log In First!",
                         confirmButtonText: "Go to Login",
+                        confirmButtonColor: '#FED154',
+                        allowEscapeKey: true,
+                        customClass: 'swal-background',
                     }).then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = "/";
