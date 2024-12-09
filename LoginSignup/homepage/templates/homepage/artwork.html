@@ -1,47 +1,103 @@
+{#{% extends 'shop/main.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{#<!DOCTYPE html>#}
+{# <!-- Prgrmr: Alimurung -->#}
+{#<html>#}
+{#    <head>#}
+{#        <meta charset="utf-8">#}
+{#        <meta http-equiv="X-UA-Compatible" content="IE=edge">#}
+{#        <title>Artwork</title>#}
+{#        <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#        <!-- for css -->#}
+{#    </head>#}
+{#    <body>#}
+{#        <div class="container">#}
+{##}
+{#            <div class="row justify-content-center">#}
+{##}
+{#                <div class="col">#}
+{#                    <a href="{% url 'base:gallery' %}" class="btn btn-dark my-3">Back</a>#}
+{#                    #}
+{#                    <div style="height: 90vh;">#}
+{#                        <img class="thumbnail" style="max-width: 100%; max-height: 100%;" alt="empty-photo-box" src="{{ artwork.image_url }}">#}
+{#                        <p>{{ artwork.description }}</p>#}
+{#                    </div>#}
+{#                    <a href="" class="btn btn-dark my-3">Delete</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="container">#}
+{#            <h2>Comments</h2>#}
+{#            {% if not artwork.comments.all %}#}
+{#                No comments yet... <a href='#'>#}
+{#                Comment</a>#}
+{#            {% else %}#}
+{#                    {% for comment in artwork.comments.all %}#}
+{#                        <strong>#}
+{#                            {{ comment.name }} - #}
+{#                            {{ comment.date_added }}#}
+{#                        </strong>#}
+{#                    {% endfor %}#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </body>#}
+{##}
+{#</html>#}
+{#{% endblock content %}#}
 {% extends 'shop/main.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
- <!-- Prgrmr: Alimurung -->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Artwork</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- for css -->
-    </head>
-    <body>
-        <div class="container">
-
-            <div class="row justify-content-center">
-
-                <div class="col">
-                    <a href="{% url 'base:gallery' %}" class="btn btn-dark my-3">Back</a>
-                    
-                    <div style="height: 90vh;">
-                        <img class="thumbnail" style="max-width: 100%; max-height: 100%;" alt="empty-photo-box" src="{{ artwork.image_url }}">
-                        <p>{{ artwork.description }}</p>
-                    </div>
-                    <a href="" class="btn btn-dark my-3">Delete</a>
-                </div>
-            </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magani Artwork</title>
+</head>
+<body>
+  <div class="view-container" style="height: 500px; display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr 1fr;">
+    <div class="left-panel" style="grid-column: 1 / 3; grid-row: 1 / -1; align-self: center; justify-self: center;">
+      <img src="{{ artwork.image_url }}" alt="Magani Artwork" class="artwork" style="height: 350px;border-top: 1px solid #333333; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+      <div class="arrow arrow-left">&lt;</div>
+      <div class="arrow arrow-right">&gt;</div>
+    </div>
+    <div class="right-panel" style="grid-column: 3 / 5; grid-row: 1 / -1; background-color: #383838; padding: 20px; border-radius: 20px; align-self: center; justify-content: center; height: 100%">
+        <div class="profile" style="display: flex;">
+          <img src="{{ user.profile_url }}" alt="Profile Picture" class="profile-picture" style="height: 50px; margin-right: 10px;">
+          <div class="profile-info">
+            <p class="profile-name" style="color: #FFFFFF; font-weight: 700">{{ user.first_name }} {{ user.last_name }} <br><span style="font-weight: 400; font-size: small;">{{ user.username }}</span></p>
+          </div>
         </div>
-        <div class="container">
-            <h2>Comments</h2>
+      <h1 class="title" style="text-align: center; font-size: 40px; color: #FFFFFF">{{ artwork.artName }}</h1>
+        <hr style="border-color: white; border-width: 3px">
+      <p class="description" style="height: 100px">
+        {{ artwork.description }}
+      </p>
+        <hr style="border-color: white; border-width: 3px">
+      <div class="social-stats" style="color: #FFFFFF; align-items: center; justify-content: space-evenly">
+        <span class="likes">💧 228K</span>
+        <span class="comments">💬 28K</span>
+      </div>
+        <hr style="border-color: white; border-width: 3px">
+        <div class="container" style="color: white">
             {% if not artwork.comments.all %}
                 No comments yet... <a href='#'>
                 Comment</a>
             {% else %}
                     {% for comment in artwork.comments.all %}
                         <strong>
-                            {{ comment.name }} - 
+                            {{ comment.name }} -
                             {{ comment.date_added }}
                         </strong>
                     {% endfor %}
             {% endif %}
         </div>
-    </body>
-
+    </div>
+  </div>
+</body>
 </html>
+
 {% endblock content %}

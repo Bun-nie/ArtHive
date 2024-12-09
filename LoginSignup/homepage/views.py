@@ -17,7 +17,7 @@ def gallery(request):
 
     categories = Category.objects.all()
     # context = {'categories': categories, 'artworks': artworks}
-    return render(request, 'homepage/gallery.html', {'categories': categories, 'artworks': artworks})
+    return render(request, 'homepage/gallery.html', {'categories': categories, 'artworks': artworks, 'user' : user})
 
 @login_required(login_url='base: login')
 def viewArtwork(request, pk):
@@ -51,12 +51,15 @@ def addArtwork(request):
                 name=category_new
             )
         else:
-            category = None        
+            category = None
+
+        artName = data.get('artName', '')
 
         # aw stands for artwork. i can't make another variable using 'artwork' as it is being used inside the for loop  
         for aw in artworks:
             artwork = Artwork.objects.create(
                 category = category,
+                artName = artName,
                 description = data['description'],
                 artwork = aw,
             )

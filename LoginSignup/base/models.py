@@ -38,3 +38,10 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    def profile_url(self):
+        try:
+            url = self.profile_picture.url
+        except:
+            url = ''
+        return url

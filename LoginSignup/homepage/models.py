@@ -23,7 +23,7 @@ class Artwork(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True
     )
-
+    artName = models.CharField(default='Ana', max_length=100, null=False, blank=False)
     artwork = models.ImageField(null=False, blank=False, upload_to='artmedia/')
     description = models.TextField()
 
