@@ -101,54 +101,72 @@
         <div class="main-content">
             <div class="posts-section">
                 <h2>POSTS</h2>
-                <div class="posts">
-                    <div class="post-card">
-                        <img src="post-image1.jpg" alt="Post">
-                    </div>
-                    <div class="post-card">
-                        <img src="post-image2.jpg" alt="Post">
-                    </div>
-                    <div class="post-card">
-                        <img src="post-image3.jpg" alt="Post">
-                    </div>
-                    <div class="post-card">
-                        <img src="post-image4.jpg" alt="Post">
-                    </div>
-                    <div class="post-card">
-                        <img src="post-image5.jpg" alt="Post">
-                    </div>
-                    <div class="post-card">
-                        <img src="post-image6.jpg" alt="Post">
+                <div class="row" style="align-items: center; justify-items: center">
+                    <div>
+                        <div>
+                            {% for product in products %}
+                                <a href="{% url 'view_product' product.id %}" class="btn btn-sm m-1">
+                                    <div class="card" style="height: 300px; width: 200px; border-radius: 20px">
+                                        <div class="card-header" style="display: flex; align-items: center;">
+                                            <img src="{{ product.user.profile_url }}" alt="Profile Picture"
+                                                 class="profile-picture"
+                                                 style="object-fit: cover; height: 40px; width: 40px; border-radius: 50%;">
+                                            <div class="profile-info" style="margin-left: 0px;">
+                                                <p class="profile-name" style="color: #1E2329; font-size: 11px; font-weight: 700;">
+                                                    {{ product.user.first_name }} {{ product.user.last_name }}
+                                                </p>
+                                                <span class="profile-username" style="color: #1E2329; font-size: 10px; margin-left: -60px; margin-top: -20px">
+                                                    @{{ product.user.username }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div style="height: 250px; width: 100%; overflow: hidden;">
+                                            <img src="{{ product.image_url }}" alt="Artwork"
+                                                 class="artwork"
+                                                 style="object-fit: cover; height: 100%; width: 100%;">
+                                        </div>
+                                    </div>
+                                </a>
+                                {% empty %}
+                                <h3>No products currently on sale</h3>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="listings-section">
                 <h2>LISTINGS</h2>
-                <div class="listings">
-                    <div class="listing-card">
-                        <img src="listing-image1.jpg" alt="Listing">
-                        <p>P 8,000,000.00</p>
-                    </div>
-                    <div class="listing-card">
-                        <img src="listing-image2.jpg" alt="Listing">
-                        <p>P 8,000,000.00</p>
-                    </div>
-                    <div class="listing-card">
-                        <img src="listing-image3.jpg" alt="Listing">
-                        <p>P 8,000,000.00</p>
-                    </div>
-                    <div class="listing-card">
-                        <img src="listing-image4.jpg" alt="Listing">
-                        <p>P 8,000,000.00</p>
-                    </div>
-                    <div class="listing-card">
-                        <img src="listing-image5.jpg" alt="Listing">
-                        <p>P 8,000,000.00</p>
-                    </div>
-                    <div class="listing-card">
-                        <img src="listing-image6.jpg" alt="Listing">
-                        <p>P 8,000,000.00</p>
+                <div class="row" style="align-items: center; justify-items: center">
+                    <div>
+                        <div>
+                            {% for artwork in artworks %}
+                                <a href="{% url 'base:view_artwork' pk=artwork.id %}" class="btn btn-sm m-1">
+                                    <div class="card" style="height: 300px; width: 200px; border-radius: 20px">
+                                        <div class="card-header" style="display: flex; align-items: center;">
+                                            <img src="{{ artwork.user.profile_url }}" alt="Profile Picture"
+                                                 class="profile-picture"
+                                                 style="object-fit: cover; height: 40px; width: 40px; border-radius: 50%;">
+                                            <div class="profile-info" style="margin-left: 0px;">
+                                                <p class="profile-name" style="color: #1E2329; font-size: 11px; font-weight: 700;">
+                                                    {{ artwork.user.first_name }} {{ artwork.user.last_name }}
+                                                </p>
+                                                <span class="profile-username" style="color: #1E2329; font-size: 10px; margin-left: -60px; margin-top: -20px">
+                                                    @{{ artwork.user.username }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div style="height: 250px; width: 100%; overflow: hidden;">
+                                            <img src="{{ artwork.image_url }}" alt="Artwork"
+                                                 class="artwork"
+                                                 style="object-fit: cover; height: 100%; width: 100%;">
+                                        </div>
+                                    </div>
+                                </a>
+                            {% empty %}
+                            <h3>No artworks uploaded</h3>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

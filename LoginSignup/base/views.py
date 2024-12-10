@@ -5,11 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import SignUpForm, LoginForm, CustomPasswordChangeForm
 from django.contrib import messages
-from shop.models import Order
+from shop.models import Order, Product
+from homepage.models import Artwork
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import get_user_model
 
 # Create your views here.
-from django.contrib.auth import get_user_model
+
 User = get_user_model()
 # for login
 # cleaned code from the previous 
@@ -32,7 +34,9 @@ def userProfile(request):
     if request.user.is_staff:
         return render(request, "admin-profile.html", {})
     else:
-        return render(request, "home.html", {})
+        products = Product.objects.filter(user=request.user)
+        artworks = Artwork.objects.filter(user=request.user)
+        return render(request, "home.html", {'products': products, 'artworks': artworks})
 
 @login_required
 def viewHoneycomb(request):

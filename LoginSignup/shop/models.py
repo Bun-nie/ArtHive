@@ -17,7 +17,7 @@ class Product(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(ShopCategory, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     digital = models.BooleanField(default=False, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     # image = models.ImageField(upload_to='products/')
