@@ -53,7 +53,7 @@
 
     </div>
     <div style="display: flex; align-items: center; gap: 10px">
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and request.path != '/profile/' %}
         <a href="{% url 'userProfile' %}" class="profile-picture">
             <img src="{% if product.user.profile_url %}{{ product.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}"  alt="Profile Picture" style="object-fit: cover; height: 40px; width: 40px;">
         </a>
@@ -61,7 +61,7 @@
             {% csrf_token %}
             <button type="submit" class="yellow-button">Logout</button>
         </form>
-
+        {% elif request.path == '/profile/' %}
         {% else %}
         <a href="{% url 'login' %}">
             <button class="yellow-button">Get Started</button>

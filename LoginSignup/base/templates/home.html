@@ -1,64 +1,158 @@
+{#{% extends 'shop/main.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#    <head>#}
+{#        <title>Honeycomb</title>#}
+{#        <link rel="stylesheet" href="css/admin-styles.css">#}
+{#    </head>#}
+{#    <body>#}
+{#        <!-- CONTENT -->#}
+{#        <div class="content-section">#}
+{#            <!-- profile header -->#}
+{#            <div class="media">#}
+{#                <!-- user.profile.image.url -->#}
+{#                 <!-- image will not show yet in my version: ana -->#}
+{#                <img class="rounded-circle account-img" src="{{ user.image.url }}" alt="profile-img"> #}
+{#                <div class="media-body">#}
+{#                    <h2 id="account-heading">{{ user.username }}</h2>#}
+{#                    <p id="heading-2"></p>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <!-- for the art board -->#}
+{#            <main>#}
+{#                <div class="art-board">#}
+{#                    <div class="pin-board-left">#}
+{#                        <h1>HONEYCOMB</h1>#}
+{#                        <!-- styles will be in bootstrap para tab form siya -->#}
+{#                        <ul class="breadcrumb">#}
+{#                            <li>#}
+{#                                <a href="{% url 'honeycomb' %}">Honey Pin</a>#}
+{#                            </li>#}
+{#                            <li><i class='bx bx-hive'></i></li>#}
+{#                            <li>#}
+{#                                <a href="{% url 'orderTrack' %}">Orders</a>#}
+{#                            </li>#}
+{#                            <li><i class='bx bx-package' ></i></li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </main>#}
+{#        </div>#}
+{#        <!-- PROFILE SIDE BAR -->#}
+{#         <!-- same function and design as admin profile: bottom side sidebar -->#}
+{#        <section id="sidebar">#}
+{#            <ul class="side-menu">#}
+{#                <li>#}
+{#                    <a href="{% url 'profileSettings' %}">#}
+{#                        <i class='bx bxs-cog'></i>#}
+{#                        <span class="text">Settings</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="#" class="logout">#}
+{#                        <i class='bx bxs-door-open' ></i>#}
+{#                        <span class="text">Logout</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </section>#}
+{#    </body>#}
+{#</html>#}
+{#{% endblock content %}#}
+
 {% extends 'shop/main.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Honeycomb</title>
-        <link rel="stylesheet" href="css/admin-styles.css">
-    </head>
-    <body>
-        <!-- CONTENT -->
-        <div class="content-section">
-            <!-- profile header -->
-            <div class="media">
-                <!-- user.profile.image.url -->
-                 <!-- image will not show yet in my version: ana -->
-                <img class="rounded-circle account-img" src="{{ user.image.url }}" alt="profile-img"> 
-                <div class="media-body">
-                    <h2 id="account-heading">{{ user.username }}</h2>
-                    <p id="heading-2"></p>
+<link rel="stylesheet" type="text/css" href="{% static 'css/user-profile.css' %}">
+    <div class="profile-container">
+        <div class="sidebar">
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img src="{% if product.user.profile_url %}{{ product.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}"  alt="Profile Picture">
+                </div>
+                <h1 style="font-weight: 700; color: white">{{ user.first_name }} {{ user.last_name }}</h1>
+                <p>@{{ user.username }}</p>
+                <div>
+                    <a href="{% url 'honeycomb' %}">
+                        <button class="yellow-button">Honey Pin</button>
+                    </a>
+                    <a href="{% url 'orderTrack' %}">
+                        <button class="yellow-button">Orders</button>
+                    </a>
+                </div>
+            <br>
+            <br>
+                <div class="settings">
+                    <a href="{% url 'profileSettings' %}">
+                      <img src="{% static 'resources/settings.png' %}" style="height: 30px">
+                      &nbsp&nbspSettings
+                    </a>
+                    <a href="{% url 'logout' %}">
+                      <img src="{% static 'resources/logout.png' %}" style="height: 30px">
+                      &nbsp&nbspLogout
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="posts-section">
+                <h2>POSTS</h2>
+                <div class="posts">
+                    <div class="post-card">
+                        <img src="post-image1.jpg" alt="Post">
+                    </div>
+                    <div class="post-card">
+                        <img src="post-image2.jpg" alt="Post">
+                    </div>
+                    <div class="post-card">
+                        <img src="post-image3.jpg" alt="Post">
+                    </div>
+                    <div class="post-card">
+                        <img src="post-image4.jpg" alt="Post">
+                    </div>
+                    <div class="post-card">
+                        <img src="post-image5.jpg" alt="Post">
+                    </div>
+                    <div class="post-card">
+                        <img src="post-image6.jpg" alt="Post">
+                    </div>
                 </div>
             </div>
 
-            <!-- for the art board -->
-            <main>
-                <div class="art-board">
-                    <div class="pin-board-left">
-                        <h1>HONEYCOMB</h1>
-                        <!-- styles will be in bootstrap para tab form siya -->
-                        <ul class="breadcrumb">
-                            <li>
-                                <a href="{% url 'honeycomb' %}">Honey Pin</a>
-                            </li>
-                            <li><i class='bx bx-hive'></i></li>
-                            <li>
-                                <a href="{% url 'orderTrack' %}">Orders</a>
-                            </li>
-                            <li><i class='bx bx-package' ></i></li>
-                        </ul>
+            <div class="listings-section">
+                <h2>LISTINGS</h2>
+                <div class="listings">
+                    <div class="listing-card">
+                        <img src="listing-image1.jpg" alt="Listing">
+                        <p>P 8,000,000.00</p>
+                    </div>
+                    <div class="listing-card">
+                        <img src="listing-image2.jpg" alt="Listing">
+                        <p>P 8,000,000.00</p>
+                    </div>
+                    <div class="listing-card">
+                        <img src="listing-image3.jpg" alt="Listing">
+                        <p>P 8,000,000.00</p>
+                    </div>
+                    <div class="listing-card">
+                        <img src="listing-image4.jpg" alt="Listing">
+                        <p>P 8,000,000.00</p>
+                    </div>
+                    <div class="listing-card">
+                        <img src="listing-image5.jpg" alt="Listing">
+                        <p>P 8,000,000.00</p>
+                    </div>
+                    <div class="listing-card">
+                        <img src="listing-image6.jpg" alt="Listing">
+                        <p>P 8,000,000.00</p>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
-        <!-- PROFILE SIDE BAR -->
-         <!-- same function and design as admin profile: bottom side sidebar -->
-        <section id="sidebar">
-            <ul class="side-menu">
-                <li>
-                    <a href="{% url 'profileSettings' %}">
-                        <i class='bx bxs-cog'></i>
-                        <span class="text">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="logout">
-                        <i class='bx bxs-door-open' ></i>
-                        <span class="text">Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-    </body>
-</html>
+    </div>
+
 {% endblock content %}
