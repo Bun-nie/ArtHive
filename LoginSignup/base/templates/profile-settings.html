@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="settings-section">
+        <a href="{% url 'password_change' %}">
+            <i class='bx bxs-cog'></i>
+            <span class="text">Change Password</span>
+        </a>
+    </div>
+{% endblock content %}
