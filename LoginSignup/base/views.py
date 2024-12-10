@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import SignUpForm, LoginForm
 from django.contrib import messages
+from shop.models import Order
 
 # Create your views here.
 from django.contrib.auth import get_user_model
@@ -20,6 +21,34 @@ def landing(request):
 
 def aboutUs(request):
     return render(request, "about.html", {})
+
+@login_required
+def userProfile(request):
+    if request.user.is_staff:
+        return render(request, "admin-profile.html", {})
+    else:
+        return render(request, "home.html", {})
+
+@login_required
+def viewHoneycomb(request):
+    return render(request, 'honeycomb/honey-comb-main.html', {})
+
+@login_required
+def viewOrderTrack(request):
+    user = request.user
+    pk = request.user.id
+    order = Order.objects.get(id = pk)
+
+    context = {
+        'order': order,
+        'order_items': order.orderitem_set.all(),
+        'total_price': order.get_cart_total,
+        'total_items': order.get_cart_items(),
+    }
+
+    return render(request, 'honeycomb/order-track.html', context)
+
+
 
 # for authorization
 def authView(request):

@@ -125,8 +125,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# for artwork posting and product listing
 MEDIA_URL = '/artmedia/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/artmedia')
+
+# for profile picture
+PROFILE_MEDIA_URL = '/profile_picturemedia/'
+PROFILE_MEDIA_ROOT = os.path.join(BASE_DIR, 'static/profile_picturemedia')
+
+# for comment media
+COMMENT_MEDIA_URL = '/commentmedia/'
+COMMENT_MEDIA_ROOT = os.path.join(BASE_DIR, 'static/commentmedia')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

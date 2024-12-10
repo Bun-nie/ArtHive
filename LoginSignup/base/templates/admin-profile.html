@@ -1,0 +1,106 @@
+{% load static %}
+{% block static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- css -->
+        <link rel="stylesheet" href="{% static 'css/admin-styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <title>Admin</title>
+    </head>
+    <body>
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <a href="{% url 'base:gallery' %}" class="brand">
+                <i class='bx bx-wink-smile'></i>
+                <span class="text">ArtHive</span>
+            </a>
+
+            <!-- top side: database -->
+            <ul class="side-menu top">
+                <li class="active">
+                    <a href="#">
+                        <i class='bx bxs-dashboard' ></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-ghost'></i>
+                        <span class="text">All Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-food-menu'></i>
+                        <span class="text">All Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-file-image' ></i>
+                        <span class="text">All Posts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">All Orders</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- bottom side: logout settings -->
+            <ul class="side-menu">
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-cog'></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="logout">
+                        <i class='bx bxs-door-open' ></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- END OF SIDEBAR -->
+
+        <!-- CONTENT -->
+        <!-- shows db in this -->
+        <section id="content">
+            <!-- navbar -->
+            <nav>
+                <i class='bx bx-menu' ></i>
+                <a href="#" class="nav-link">ADMIN</a>
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search">
+                        <button type="submit" class="search-button">
+                            <i class='bx bx-search-alt' ></i>
+                        </button>
+                    </div>
+                </form>
+                <input type="checkbox" id="switch-mode" hidden>
+                <label for="switch-mode" class="switch-mode"></label>
+                <a href="#" class="notification">
+                    <i class='bx bx-bell' ></i>
+                    <span class="num">8</span>
+                </a>
+                <a href="#" class="profile">
+                    <img src="juzuo.jpg" alt="profile pic">
+                </a>
+             </nav>
+        </section>
+
+        <script src="{% static 'js/admin-script.js' %}"></script>
+    </body>
+</html>
+{% endblock static %}

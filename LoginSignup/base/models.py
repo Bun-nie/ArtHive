@@ -31,6 +31,18 @@ class CustomUser(AbstractUser):
     profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
     username = models.CharField(max_length=50, unique=True, null=True, blank=True)
 
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customer_groups', # related name
+        blank=True,
+    )
+
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customer_permissions',
+        blank=True,
+    )
+
     USERNAME_FIELD = 'email'  # Use email for authentication instead of username
     REQUIRED_FIELDS = []  # No additional fields required for creating a superuser
 
@@ -39,6 +51,7 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
+    @property
     def profile_url(self):
         try:
             url = self.profile_picture.url

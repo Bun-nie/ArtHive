@@ -1,0 +1,36 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
+        <div class="order-head">
+            <button class="yellow-button"><a href="{% url 'base:gallery' %}">Back</a></button>
+            <h1>Orders</h1>
+            <h2># {{ order.id }}</h2>
+            <p>Date Ordered: {{ order.date_ordered }}</p>
+            <p>Status: 
+                {% if order.complete %} 
+                    Complete 
+                {% else %}
+                    Pending
+                {% endif %}
+            </p>
+            <p>Transaction ID: {{ order.transaction_id }}</p>
+        </div>
+
+        <div class="order-items">
+            <h2>Order Items</h2>
+            <ul>
+                {% for item in order_items %}
+                    <li>
+                        <strong>Product:</strong>{{ item.product.name }} <br>
+                        <strong>Quantity:</strong>{{ item.quantity }} <br>
+                        <strong>Product:</strong>{{ item.get_total }} <br>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="order-total">
+            <h3>Total Items: {{ total_items }}</h3>
+            <h3>Total Price: {{ total_price }}</h3>
+        </div>
+{% endblock content %}
