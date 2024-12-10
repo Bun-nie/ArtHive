@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <hr>
-                <input id="form-button" class="btn btn-warning btn-block" type="submit" value="Continue">
+                <input id="form-button" class="yellow-button" type="submit" value="Continue">
             </form>
         </div>
 
@@ -41,14 +41,14 @@
 
         <div class="box-element hidden" id="payment-info">
             <small>Payment Options</small>
-            <button id="make-payment" class="btn btn-warning btn-block">Make Payment</button>
+            <button id="make-payment" class="yellow-button">Make Payment</button>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="box-element">
-            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190;&nbspBack To Cart</a>
+            <a href="{% url 'cart' %}"><button class="yellow-button">&#x2190;&nbspBack To Cart</button></a>
             <hr>
-            <h3>Order Summary</h3>
+            <h3 style="font-weight: 700; color: white">Order Summary</h3>
             <hr>
             {% for item in items %}
                 <div class="cart-row">
@@ -58,8 +58,8 @@
                     <div style="flex: 1">x{{item.quantity}}</div>
                 </div>
             {% endfor %}
-            <h5>Items: {{order.get_cart_items}}</h5>
-            <h5>Total: Php {{order.get_cart_total|floatformat:2}}</h5>
+            <h5 style="color: white">Items: <strong>{{order.get_cart_items}}</strong></h5>
+            <h5 style="color: white">Total: <strong>Php {{order.get_cart_total|floatformat:2}}</strong></h5>
         </div>
     </div>
 </div>

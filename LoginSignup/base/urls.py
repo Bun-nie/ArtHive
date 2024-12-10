@@ -10,7 +10,9 @@ urlpatterns = [
     path("signup/", authView, name="authView"),
     path("profile/", userProfile, name='userProfile'), 
     path("artboard/", viewHoneycomb, name='honeycomb'),
-    path("order-track/", viewOrderTrack, name='orderTrack')
+    path("order-track/", viewOrderTrack, name='orderTrack'),
+    path("logout/", auth_views.LogoutView.as_view(next_page = '/'), name='logout'),
+    path('password_change/', change_password, name='password_change'),
 ]
 
 # if settings.DEBUG:

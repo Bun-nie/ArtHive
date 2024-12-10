@@ -29,9 +29,9 @@
         grid-area: 1 / 1 / 5 / 5;
         align-self: center;
         justify-self: center;
-    border-radius: 10px;
-    padding: 25px;
-    background-color:#2A2F35;
+        border-radius: 10px;
+        padding: 25px;
+        background-color:#2A2F35;
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
     .form-wrap{
@@ -46,14 +46,14 @@
     margin-bottom: 5px;
     font-size: 14px;
     font-weight: 700;
-    line-height: 26px; 
+    line-height: 26px;
     }
     .form-wrap form input{
     padding: 12px 20px;
     border-radius: 5px;
     border: 1px solid #DAE1F5;
-    background: #FFF; 
-    color: #545D7A; 
+    background: #FFF;
+    color: #545D7A;
     }
     #id_username{
     margin-bottom: 20px;
@@ -89,105 +89,3 @@
     /*border-color: #10182F;*/
     
     /*}*/
-    
-    
-    
-    /*body {
-        font-family: 'Mulish', sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    
-    h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #444;
-        margin-bottom: 20px;
-    }
-    
-    
-    #section {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        max-width: 400px;
-        width: 100%;
-        text-align: center;
-    }
-    
-    p {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-        color: #666;
-    }
-    
-    
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    input[type="text"],
-    input[type="password"],
-    button {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-    
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-        border-color: #0066cc;
-        outline: none;
-    }
-    
-    button {
-        background-color: #0066cc;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-        border: none;
-        transition: background-color 0.3s;
-    }
-    
-    button:hover {
-        background-color: #004c99;
-    }
-    
-    button:focus {
-        outline: none;
-        border: 1px solid #004c99;
-    }
-    
-    
-    a {
-        color: #0066cc;
-        text-decoration: none;
-    }
-    
-    a:hover {
-        text-decoration: underline;
-    }
-    
-    
-    .signup-link {
-        margin-top: 15px;
-        display: inline-block;
-        font-size: 1rem;
-        font-weight: 500;
-    }
-    
-    .signup-link:hover {
-        color: #004c99;
-    }
-    */

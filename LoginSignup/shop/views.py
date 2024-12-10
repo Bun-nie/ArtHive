@@ -128,5 +128,16 @@ def render_product_form(request):
     return render(request, 'product_form.html', {'form': form})
 
 def view_product(request, product_id):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0,}
+        cartItems = order['get_cart_items']
+    categories = ShopCategory.objects.all()
     product = get_object_or_404(Product, id=product_id)
-    return render(request,"view_product.html",{'product':product})
+    context = {'product': product, 'cartItems': cartItems, 'shop_category': categories}
+    return render(request,"view_product.html",context)

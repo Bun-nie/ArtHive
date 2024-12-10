@@ -4,20 +4,24 @@
 <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 <div class="row">
     <div class="col-lg-12">
-        <div class="box-element">
-            <a class="btn btn-outline-dark" href="{% url 'shop' %}">&#x2190;&nbspContinue Shopping</a>
+        <div class="box-element" style="border-radius: 30px">
+            <a href="{% url 'shop' %}"><button class="yellow-button">&#x2190;&nbspContinue Shopping</button></a>
             <br>
             <br>
-            <table class="table">
-                <tr>
-                    <th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
-                    <th><h5>Total: <strong>{{order.get_cart_total|floatformat:2}}</strong></h5></th>
-                    <th>
-                        <a style="float: right; margin: 5px;" class="btn btn-warning me-3" href="{% url 'checkout' %}">
-                            Checkout
-                        </a>
-                    </th>
-                </tr>
+            <table style="width: 100%; background-color: #1E2329; border-collapse: collapse;">
+              <tr>
+                <th style="text-align: left; padding: 10px;">
+                  <h5 style="margin: 0; color: white">Items: <strong>{{ order.get_cart_items }}</strong></h5>
+                </th>
+                <th style="text-align: center; padding: 10px;">
+                  <h5 style="margin: 0; color: white">Total: <strong>{{ order.get_cart_total|floatformat:2 }}</strong></h5>
+                </th>
+                <th style="text-align: right; padding: 10px;">
+                  <a href="{% url 'checkout' %}">
+                    <button class="yellow-button">Checkout</button>
+                  </a>
+                </th>
+              </tr>
             </table>
         </div>
         <br>

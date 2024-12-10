@@ -15,6 +15,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view-art.css' %}"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -49,17 +50,29 @@
       <a href="{% url 'base:gallery' %}">Explore</a>
       <a href="{% url 'shop' %}">Shop</a>
       <a href="{% url 'about' %}">About Us</a>
-      <a href="{% url 'userProfile' %}">User</a>
 
     </div>
     <div style="display: flex; align-items: center; gap: 10px">
-        <a href="{% url 'login' %}">
-          <button class="yellow-button">Get Started</button>
+        {% if user.is_authenticated %}
+        <a href="{% url 'userProfile' %}" class="profile-picture">
+            <img src="{% if product.user.profile_url %}{{ product.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}"  alt="Profile Picture" style="object-fit: cover; height: 40px; width: 40px;">
         </a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="yellow-button">Logout</button>
+        </form>
+
+        {% else %}
+        <a href="{% url 'login' %}">
+            <button class="yellow-button">Get Started</button>
+        </a>
+        {% endif %}
+        {% if request.path == '/shop/' or request.path|slice:":19" == '/shop/view_product/' %}
         <a href="{% url 'cart' %}" style="display: flex; align-items: center">
             <img id="cart-icon" src="{% static 'resources/cart.png' %}" alt="Cart" width="30" height="30">
-            <p id="cart-total" class="ms-2 mb-0">{{cartItems}}</p>
+            <p id="cart-total" class="ms-2 mb-0">{{ cartItems }}</p>
         </a>
+        {% endif %}
 
     </div>
 
