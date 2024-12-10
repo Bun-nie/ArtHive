@@ -3,7 +3,7 @@
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/view-art.css' %}">
         <div class="container">
-            <div class="col-md-3">
+            <div>
                 {% if request.user.is_authenticated %}
                     <h3 style="color: white; font-weight: 700">Welcome, {{request.user.first_name}}</h3>
                 {% endif %}
@@ -13,6 +13,12 @@
                             <a href="{% url 'base:add_artwork' %}">
                                 <img src="{% static 'resources/add.png' %}" style="height: 100px" class="category-image">
                                 <p class="category-name">Add Artwork</p>
+                            </a>
+                        </div>
+                        <div class="category">
+                            <a href="{% url 'base:gallery' %}">
+                                <img src="{% static 'resources/1.png' %}" style="height: 100px" class="category-image">
+                                <p class="category-name">All Artworks</p>
                             </a>
                         </div>
                         {% for category in categories %}
@@ -28,6 +34,9 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <h3 style="font-weight: 700; color: #FFD700">Daily Buzz</h3>
+            </div>
             <div class="row" style="align-items: center; justify-items: center">
                 <div>
                     <div>
@@ -35,15 +44,15 @@
                             <a href="{% url 'base:view_artwork' pk=artwork.id %}" class="btn btn-sm m-1">
                                 <div class="card" style="height: 300px; width: 200px; border-radius: 20px">
                                     <div class="card-header" style="display: flex; align-items: center;">
-                                        <img src="{{ user.profile_url }}" alt="Profile Picture"
+                                        <img src="{{ artwork.user.profile_url }}" alt="Profile Picture"
                                              class="profile-picture"
                                              style="object-fit: cover; height: 40px; width: 40px; border-radius: 50%;">
-                                        <div class="profile-info" style="margin-left: 10px;">
+                                        <div class="profile-info" style="margin-left: 0px;">
                                             <p class="profile-name" style="color: #1E2329; font-size: 11px; font-weight: 700;">
-                                                {{ user.first_name }} {{ user.last_name }}
+                                                {{ artwork.user.first_name }} {{ artwork.user.last_name }}
                                             </p>
-                                            <span class="profile-username" style="color: #1E2329; font-size: 10px; margin-left: -70px;">
-                                                @{{ user.username }}
+                                            <span class="profile-username" style="color: #1E2329; font-size: 10px; margin-left: -60px; margin-top: -20px">
+                                                @{{ artwork.user.username }}
                                             </span>
                                         </div>
                                     </div>

@@ -31,6 +31,7 @@ def addArtwork(request):
     
     if request.method == 'POST':
         data = request.POST
+        user = request.user
         artworks = request.FILES.getlist('images', False)
 
         # if data['category'] != 'none':
@@ -58,6 +59,7 @@ def addArtwork(request):
         # aw stands for artwork. i can't make another variable using 'artwork' as it is being used inside the for loop  
         for aw in artworks:
             artwork = Artwork.objects.create(
+                user = user,
                 category = category,
                 artName = artName,
                 description = data['description'],

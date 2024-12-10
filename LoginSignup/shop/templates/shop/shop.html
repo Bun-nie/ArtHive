@@ -2,20 +2,74 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view-art.css' %}">
 <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 
 <div class="row">
-    {% for product in products %}
-    <div class="col-lg-4" style="display: flex; align-items: center; justify-content: space-between; height: 200px; cursor:pointer;" >
-        <img class="thumbnail" src="{{product.image_url}}" style="width: 150px; height: 200px; align-self: center; justify-self: center;" onclick="window.location.href='{% url 'view_product' product.id %}'">
-        <div class="box-element product" style="height: 200px">
-            <h6><strong>{{product.name}}</strong></h6>
-            <hr>
-            <h4 style="display: inline-block;"><strong>Php{{product.price|floatformat:2}}</strong></h4>
-            <button style="margin: 10px" data-product="{{product.id}}" data-action="add" class="yellow-button add-btn update-cart">Add to Cart</button>
+    <div class="row">
+        {% if request.user.is_authenticated %}
+            <h3 style="color: white; font-weight: 700">Welcome, {{request.user.first_name}}</h3>
+        {% endif %}
+        <div class="categories-container">
+            <div class="category">
+                <a href="{% url 'product_form' %}">
+                    <img src="{% static 'resources/add.png' %}" style="height: 100px" class="category-image">
+                    <p class="category-name">Add Listing</p>
+                </a>
+            </div>
+            <div class="category">
+                <a href="{% url 'shop' %}">
+                    <img src="{% static 'resources/1.png' %}" style="height: 100px" class="category-image">
+                    <p class="category-name">All Listings</p>
+                </a>
+            </div>
+            {% for category in shop_category %}
+                <div class="category">
+                    <a href="{% url 'shop' %}?category={{ category.name }}">
+                        <div class="category-image"
+                             style="background-image: url('{% static "resources/" %}{{ category.name|slugify }}.png');">
+                        </div>
+                        <p class="category-name">{{ category.name }}</p>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
+    <div>
+        <h3 style="font-weight: 700; color: #FFD700">Buzz Listings</h3>
+    </div>
+    <div class="row" style="align-items: center; justify-items: center">
+        <div>
+            <div>
+                {% for product in products %}
+                    <a href="{% url 'view_product' product.id %}" class="btn btn-sm m-1">
+                        <div class="card" style="height: 300px; width: 200px; border-radius: 20px">
+                            <div class="card-header" style="display: flex; align-items: center;">
+                                <img src="{{ product.user.profile_url }}" alt="Profile Picture"
+                                     class="profile-picture"
+                                     style="object-fit: cover; height: 40px; width: 40px; border-radius: 50%;">
+                                <div class="profile-info" style="margin-left: 0px;">
+                                    <p class="profile-name" style="color: #1E2329; font-size: 11px; font-weight: 700;">
+                                        {{ product.user.first_name }} {{ product.user.last_name }}
+                                    </p>
+                                    <span class="profile-username" style="color: #1E2329; font-size: 10px; margin-left: -60px; margin-top: -20px">
+                                        @{{ product.user.username }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="height: 250px; width: 100%; overflow: hidden;">
+                                <img src="{{ product.image_url }}" alt="Artwork"
+                                     class="artwork"
+                                     style="object-fit: cover; height: 100%; width: 100%;">
+                            </div>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <h3>No products currently on sale</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
