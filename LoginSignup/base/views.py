@@ -24,6 +24,10 @@ def aboutUs(request):
     return render(request, "about.html", {})
 
 @login_required
+def profile_settings(request):
+    return render(request, "profile-settings.html", {})
+
+@login_required
 def userProfile(request):
     if request.user.is_staff:
         return render(request, "admin-profile.html", {})
