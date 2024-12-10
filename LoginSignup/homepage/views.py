@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
-from .models import Category, Artwork
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Category, Artwork, Comment
 from django.contrib.auth.decorators import login_required
+from .forms import CommentForm
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 # Create your views here.
 # Prgrmr: Alimurung
@@ -15,13 +18,34 @@ def gallery(request):
         artworks = Artwork.objects.filter(category__name = category, category__user = user)
 
     categories = Category.objects.all()
-    # context = {'categories': categories, 'artworks': artworks}
     return render(request, 'homepage/gallery.html', {'categories': categories, 'artworks': artworks, 'user' : user})
 
 @login_required(login_url='login')
 def viewArtwork(request, pk):
-    artwork = Artwork.objects.get(id=pk)
-    return render(request, 'homepage/artwork.html', {'artwork': artwork})
+    artwork = Artwork.objects.get(id=pk) # for the artwork field view
+
+    # for the comments
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            comment_body = form.save(commit=False)
+            comment_body.user = get_object_or_404(User, id=request.user.id)
+            # naa diri ang bug about sa ID
+            comment_body.artwork_ref = get_object_or_404(Artwork, id=pk)
+            comment_body.save()
+        else:
+            raise ValidationError("Incorrect data. No ID")
+        
+    else:
+        form = CommentForm()
+
+    return render(request, 'homepage/artwork.html', {
+        'artwork': artwork,
+        'comment_body' : Comment.objects.filter(artwork_ref__id=pk),
+        'form': form
+        })
+    # until here ang bug
 
 @login_required(login_url='login')
 def addArtwork(request):
@@ -32,15 +56,6 @@ def addArtwork(request):
         data = request.POST
         user = request.user
         artworks = request.FILES.getlist('images', False)
-
-        # if data['category'] != 'none':
-        #     category = Category.objects.get(id=data['category'])
-        # elif data['category_new'] != ' ':
-        #     category, created = Category.objects.get_or_create(
-        #         user = user, 
-        #         name = data['category_new'])
-        # else:
-        #     pass
 
         category_new = data.get('category_new', '')
         if data.get('category') != 'none':
@@ -68,8 +83,3 @@ def addArtwork(request):
 
     context = {'categories': categories}
     return render(request, 'homepage/add.html', context)
-
-@login_required
-def addComment(request):
-    context = {'comments': comments}
-    return render(request, 'homepage/artwork.html', context)

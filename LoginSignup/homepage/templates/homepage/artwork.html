@@ -42,21 +42,72 @@
       </div>
         <hr style="border-color: white; border-width: 3px">
         <div class="container" style="color: white">
-            {% if not artwork.comments.all %}
-                No comments yet... <a href='#'>
-                Comment</a>
+            <h2>Comments</h2>
+            {% if not arwork.comments.all %}
+              No comments yet...
+              <!-- if there are existing comments -->
             {% else %}
-                    {% for comment in artwork.comments.all %}
-                        <strong>
-                            {{ comment.name }} -
-                            {{ comment.date_added }}
-                        </strong>
-                    {% endfor %}
+              <div class="comment-section">
+                {% for comment in artwork.comments.all %}
+                  <div class="container">
+                    <div>
+                      <!-- redirect to profile if photo/name is pressed -->
+                       <!-- double underscore: the values from the tables -->
+                      <img src="profile_picturemedia/{{ comment.user__picture }}" alt="{{ comment.user__username }}" onclick="window.location.href='profile/{{ comment.user__id }}'">
+                      <h5 class="user-username-card" onclick="window.location.href='{profile/{{ comment.user__id }}'">{{ comment.user.username }}</h5>
+                      <h6 class="date-subtitle">{{ comment.date_created }}</h6>
+                    </div>
+                    <div>
+                      <!-- if user wants to edit, delete, or report other comments -->
+                      {% if user_ref.id == comment.user_ref__id %}
+                        <a href="#">
+                            <button class="yellow-button">
+                                Edit
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="yellow-button">
+                                Delete
+                            </button>
+                        </a>
+                      {% else %}
+                          <a href="#">Report</a>    
+                      {% endif %}
+                    </div>
+                    <!-- end of showing comments -->
+                  </div>
+                  <p class="text">{{ comment.comment_body }}</p>
+                  {% if comment.image %}
+                            <img src="commentmedia/{{ comment.image }}" alt="image">
+                  {% endif %}
+                {% endfor %}
+              </div>
             {% endif %}
+            <!-- create a comment -->
+            <div class="create-comment">
+              <h2>Buzz around...</h2>
+              <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <div class="comment-form-group">
+                    {{ form.comment_body.label_tag }}
+                    {{ form.comment_body }}
+                  </div>
+                  <div class="comment-form-group">
+                    {{ form.comment_image.label_tag }}
+                    {{ form.comment_image }}
+                  </div>
+                <button class="yellow-button" type="submit">Buzz</button>
+              </form>
+            </div>
         </div>
     </div>
   </div>
 </body>
+<script>
+  var artwork_pk = '{{ artwork_pk }}'
+  var csrf_token = '{{ csrf_token }}'
+</script>
 </html>
 
 {% endblock content %}
