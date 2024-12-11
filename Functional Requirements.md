@@ -21,6 +21,8 @@ Discovery and navigation allows users to efficiently explore and navigate throug
  - **Search** - users may look up specific content, artists, themes, or categories by entering relevant keywords or phrases into the search bar. Upon searching, the system will return relevant results from the database based on the users’ inputs.
  - **Filter and Sort** - dynamic filtering and sorting options enable users to refine their search results based on a specific criteria. Filters may include categories such as art style, medium, date of creation, popularity, and price (for listed pieces). Users can apply multiple filters simultaneously to narrow down results to the most relevant selections. In addition to filtering, users may sort the results based on various parameters (e.g. alphabetical, newest to oldest, etc.).
 
+![default](https://github.com/user-attachments/assets/ad1e593c-6daa-4c6b-9eaa-23d4a8d8d19d)
+
     
 ### 🍯NOTIFICATION
 This functionality ensures that users stay updated on important activities within the platform. Users receive real-time alerts for interactions such as comments on their artwork, new followers, or sales notifications. This functionality enhances user engagement by keeping them informed and connected to the community's latest developments.
