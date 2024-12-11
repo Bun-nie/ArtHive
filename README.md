@@ -1,4 +1,4 @@
-<a id="readme-top"></a>
+![462643643_564492322880165_1099868836382306464_n](https://github.com/user-attachments/assets/ed757cac-3d44-4e03-97cf-d7990561e373)<a id="readme-top"></a>
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -9,9 +9,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-<a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://i.ibb.co/9VMMZ0Z/462576758-984678703495193-5655876495060392474-n.png" alt="Logo" height="100">
-</a>
+
+![logo](https://github.com/user-attachments/assets/dba9b7f6-2a66-4df7-938b-b4750438717a)
 
 <h3 align="center">ArtHive: Where Creativity is a Buzz!</h3>
 
@@ -101,28 +100,15 @@ The project is built using the following libraries/frameworks:
 ## UI/UX 🎨
 
 <a href="https://www.figma.com/design/hP5u97KeIgfsPhPpMKlGxH/ArtHive%3A-Where-Creativity-is-a-Buzz-(Copy)?node-id=0-1&t=NwjXnakSBF0HUrzt-1" target="_blank">
-<img src="https://scontent.fcgy2-1.fna.fbcdn.net/v/t1.15752-9/467474749_1031232535439380_5476741394063943079_n.png?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeG61tBARuUV23fHQ5o0aCJdTKJ_5ZHkn_dMon_lkeSf990cSg8JjfI-7n9d9fHNOunJGnLn4K3MO58eh36vTo35&_nc_ohc=y9q7aJtUIYkQ7kNvgFnCHHe&_nc_zt=23&_nc_ht=scontent.fcgy2-1.fna&oh=03_Q7cD1QF0zaZ5DTg8W3eGH6ny1013pX-ynmQZ9pP2-LQLivJh4Q&oe=67771549">
+    ![image](https://github.com/user-attachments/assets/2b754c6e-de69-47f4-808d-c25fdde38f99)
 </a>
 
-<a href="https://www.figma.com/design/hP5u97KeIgfsPhPpMKlGxH/ArtHive%3A-Where-Creativity-is-a-Buzz-(Copy)?node-id=0-1&t=NwjXnakSBF0HUrzt-1" target="_blank">
-<img src="https://scontent.fcgy2-2.fna.fbcdn.net/v/t1.15752-9/462640965_4261342260855010_5875176451044869406_n.png?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGlY3WlLqW_MYXQBexvTdDhimO9Yc2POpeKY71hzY86lw_MPAZI14Pi4nsXulKQe66VgWRzv2yaZDFi_wcN878p&_nc_ohc=5aLlN5mhjBYQ7kNvgEvJ8U0&_nc_zt=23&_nc_ht=scontent.fcgy2-2.fna&oh=03_Q7cD1QEiNL3-NjpaYrxIvIL3QTDaVirTdx5jlueCkpod5MPw_A&oe=677708CC">
-</a>
+![image](https://github.com/user-attachments/assets/40050b2f-86c3-4453-8f64-7379f9827b60)
+![image](https://github.com/user-attachments/assets/43d9db0b-e55e-4364-8b77-47e5ce668e57)
+![image](https://github.com/user-attachments/assets/e161e0f5-0021-4054-ad79-25dc43a52c03)
+![image](https://github.com/user-attachments/assets/4f2bf143-48a1-46f2-9e57-2c76475433f1)
 
-<a href="https://www.figma.com/design/hP5u97KeIgfsPhPpMKlGxH/ArtHive%3A-Where-Creativity-is-a-Buzz-(Copy)?node-id=0-1&t=NwjXnakSBF0HUrzt-1" target="_blank">
-<img src="https://scontent.fcgy2-1.fna.fbcdn.net/v/t1.15752-9/462568131_1094429762347900_1098591001855135673_n.png?_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGbjEELlrLPOZocQmzMoIT0h8bcyrreKUeHxtzKut4pR6g4LRn6yhBRYealXf2JuyrLqWo3JwnnEo_pMbVagjxk&_nc_ohc=6xTDS1k8-fUQ7kNvgFlBY3u&_nc_zt=23&_nc_ht=scontent.fcgy2-1.fna&oh=03_Q7cD1QGY4xECmObiS8ZE7T4JOKoQLSjHVFjg3wK71-bzg5JzNA&oe=67772967">
-</a>
 
-<a href="https://www.figma.com/design/hP5u97KeIgfsPhPpMKlGxH/ArtHive%3A-Where-Creativity-is-a-Buzz-(Copy)?node-id=0-1&t=NwjXnakSBF0HUrzt-1" target="_blank">
-<img src="https://scontent.fcgy2-2.fna.fbcdn.net/v/t1.15752-9/462584271_2864461190395174_4798717567427172398_n.png?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGdd07HeY29RUTAljz9QhuVqV3G38NgD4qpXcbfw2APigq9PlWUtdfFV7LTmfgaDyJ26rAM0cSSErkBtCwKrgQX&_nc_ohc=Tf5M0oVSNeYQ7kNvgH9Nrzs&_nc_zt=23&_nc_ht=scontent.fcgy2-2.fna&oh=03_Q7cD1QH1gtLROzBzwiEK2vgTS0Y_TQsDSXHxLv5f9s7sr0zc_A&oe=6777282A">
-</a>
-
-<a href="https://www.figma.com/design/hP5u97KeIgfsPhPpMKlGxH/ArtHive%3A-Where-Creativity-is-a-Buzz-(Copy)?node-id=0-1&t=NwjXnakSBF0HUrzt-1" target="_blank">
-<img src="https://scontent.fcgy2-1.fna.fbcdn.net/v/t1.15752-9/462565993_9517375658277407_8229759737651492387_n.png?_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGwmQX-N5n0ebkWqGDguscOxacxXqKUSpbFpzFeopRKlpdgZoNatqYXpepBQTSSasoo-F8UdQAT8a1ER92wOoz-&_nc_ohc=ufUN1CB3M7MQ7kNvgHxyrkW&_nc_zt=23&_nc_ht=scontent.fcgy2-1.fna&oh=03_Q7cD1QEFndAAutOxutHMnkrt3VHxKk9VDd1WKSA20Nh0JauYkA&oe=6777211D">
-</a>
-
-<a href="https://www.figma.com/design/hP5u97KeIgfsPhPpMKlGxH/ArtHive%3A-Where-Creativity-is-a-Buzz-(Copy)?node-id=0-1&t=NwjXnakSBF0HUrzt-1" target="_blank">
-<img src="https://scontent.fcgy2-4.fna.fbcdn.net/v/t1.15752-9/465658877_564999313053478_7941133866009450641_n.png?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHPyy8GVb8Xordtatj7eML9N8uN5saIxOs3y43mxojE65SZZ-Q7iNJxvICzPt0-5mdeZ88bpv5IiarzWC_y81-b&_nc_ohc=e6_k9UaHn1sQ7kNvgEXP3sj&_nc_zt=23&_nc_ht=scontent.fcgy2-4.fna&oh=03_Q7cD1QESbHzJZ63MpPewXJooqxpKSEg2g6Ix7UWmj_lI1o8EKg&oe=67771243">
-</a>
 
 <div align="right">
     <a href="#readme-top">
@@ -133,6 +119,8 @@ The project is built using the following libraries/frameworks:
 
 <!-- Gantt Chart -->
 ## Gantt Chart 📊
+![image](https://github.com/user-attachments/assets/c60f2439-e0ad-4682-9eef-e50423eae722)
+![image](https://github.com/user-attachments/assets/97d7e564-8c78-4204-b88e-83bcfa3ee068)
 
 
 
@@ -149,7 +137,8 @@ The project is built using the following libraries/frameworks:
 ## Entity-Relationship Diagram (ERD) 🗂️
 
 <a href="">
-<img src=""></img>
+![462643643_564492322880165_1099868836382306464_n](https://github.com/user-attachments/assets/2ebb0163-ad31-4704-82e3-8cb9a9f48fe4)
+
 </a>
 
 <div align="right">
