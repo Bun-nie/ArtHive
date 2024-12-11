@@ -117,9 +117,8 @@ The project is built using the following libraries/frameworks:
 
 <!-- Gantt Chart -->
 ## Gantt Chart 📊
-![image](https://github.com/user-attachments/assets/c60f2439-e0ad-4682-9eef-e50423eae722)
-![image](https://github.com/user-attachments/assets/97d7e564-8c78-4204-b88e-83bcfa3ee068)
-
+![image](https://github.com/user-attachments/assets/d449d11d-1590-403e-abef-b00412954bb8)
+![image](https://github.com/user-attachments/assets/32985fef-876e-4bac-9432-5e13e7a1939d)
 
 
 
