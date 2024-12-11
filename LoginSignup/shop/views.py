@@ -13,6 +13,7 @@ from .models import *
 # Create your views here.
 from django.contrib.auth import get_user_model
 User = get_user_model()
+
 def shop(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -41,7 +42,7 @@ def cart(request):
 
     context = {'items': items, 'order':order, 'cartItems':cartItems}
     return render(request, 'shop/cart.html', context)
-
+@csrf_exempt
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -89,7 +90,8 @@ def updateItem(request):
 
 @csrf_exempt
 def processOrder(request):
-    user = get_object_or_404(settings.AUTH_USER_MODEL, id=request.user.id)
+    # user = get_object_or_404(settings.AUTH_USER_MODEL, id=request.user.id)
+    user = request.user
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 

@@ -140,6 +140,8 @@
                         title: "Yey!",
                         text: "Transaction Completed",
                         confirmButtonText: "Back to Shop",
+                        confirmButtonColor: '#FED154',
+                        customClass: 'swal-background',
                     }).then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = "{% url 'shop' %}";

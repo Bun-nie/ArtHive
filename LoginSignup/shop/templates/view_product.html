@@ -34,8 +34,9 @@
       </div>
     </div>
     <div class="seller-section">
-      <img src="{{ product.user.profile_url }}" alt="Seller Profile">
+      <img src="{% if product.user.profile_url %}{{ product.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Seller Profile">
       <div class="info">
+          <div class="name" style="font-weight: 700; margin-bottom: -20px"><p>{{ product.user.first_name }} {{ product.user.last_name }}</p></div>
         <div class="name"><p>{{ product.user.username }}</p></div>
         <a href="#">View Shop</a> | <a href="#">Message Seller</a>
       </div>

@@ -41,7 +41,8 @@ class ArtworkForm(forms.ModelForm):
                 attrs={
                     'class': 'input-field',
                     'placeholder': 'Enter new Description',
-                    'rows': 1,
+                    'rows': 3,
+                    'cols': 20,
                 }
             ),
             'artwork': forms.ClearableFileInput(

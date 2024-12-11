@@ -108,20 +108,20 @@ def authView(request):
 
     return render(request, "registration/signup.html", {"form": form})
 
+
 def change_password(request):
     if request.method == 'POST':
         form = CustomPasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():
-            # Save the new password
             form.save()
-            # Update session to keep user logged in after password change
             update_session_auth_hash(request, form.user)
-            messages.success(request, "Your password was successfully updated!")
-            return redirect('landing')  # Redirect to a success page
+            return redirect('landing')
         else:
-            messages.error(request, "Please correct the errors below.")
+            print(form.errors)  # Debugging the form errors
+            messages.error(request, "Password Too Common")
     else:
         form = CustomPasswordChangeForm(user=request.user)
+
     return render(request, 'change_password.html', {'form': form})
 
 

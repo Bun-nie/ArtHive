@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Artwork, Comment
 from django.contrib.auth.decorators import login_required
@@ -136,3 +136,16 @@ def edit_artwork(request, pk):
         form = ArtworkForm(instance=artwork)
 
     return render(request, 'homepage/edit_artwork.html', {'form': form, 'artwork': artwork})
+
+def delete_artwork(request, pk):
+    if request.method == 'DELETE':
+        artwork = get_object_or_404(Artwork, pk=pk)
+
+        # Check if the logged-in user is the owner of the artwork
+        if request.user != artwork.user:
+            return HttpResponseForbidden("You are not allowed to delete this artwork.")
+
+        artwork.delete()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})

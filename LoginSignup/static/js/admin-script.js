@@ -1,29 +1,27 @@
-// FOR SIDEBAR MENU
-/*
-* click after click responsiveness 
-*/
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
-allSideMenu.forEach(item=>{
-    const li = item.parentElement;
 
-    item.addEventListener('click', function(){
-        allSideMenu.forEach(i=>{
-            i.parentElement.classList.remove('active');
-        })
-        li.classList.add('active');
-    })
+allSideMenu.forEach(item=> {
+	const li = item.parentElement;
+
+	item.addEventListener('click', function () {
+		allSideMenu.forEach(i=> {
+			i.parentElement.classList.remove('active');
+		})
+		li.classList.add('active');
+	})
 });
 
-// FOR SIDEBAR MENU
-/*
-* toggle sidebar (not functional as of now)
-*/
+
+
+
+// TOGGLE SIDEBAR
 const menuBar = document.querySelector('#content nav .bx.bx-menu');
 const sidebar = document.getElementById('sidebar');
 
 menuBar.addEventListener('click', function () {
 	sidebar.classList.toggle('hide');
 })
+
 
 const searchButton = document.querySelector('#content nav form .form-input button');
 const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
@@ -40,6 +38,9 @@ searchButton.addEventListener('click', function (e) {
 		}
 	}
 })
+
+
+
 
 
 if(window.innerWidth < 768) {

@@ -1,37 +1,141 @@
+{#{% extends 'shop/main.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{#<!-- PRGRMR: ALIMURUNG -->#}
+{#        <div class="order-head">#}
+{#            <button class="yellow-button"><a href="{% url 'base:gallery' %}">Back</a></button>#}
+{#            <h1>Orders</h1>#}
+{#            <h2># {{ order.id }}</h2>#}
+{#            <p>Date Ordered: {{ order.date_ordered }}</p>#}
+{#            <p>Status: #}
+{#                {% if order.complete %} #}
+{#                    Complete #}
+{#                {% else %}#}
+{#                    Pending#}
+{#                {% endif %}#}
+{#            </p>#}
+{#            <p>Transaction ID: {{ order.transaction_id }}</p>#}
+{#        </div>#}
+{##}
+{#        <div class="order-items">#}
+{#            <h2>Order Items</h2>#}
+{#            <ul>#}
+{#                {% for item in order_items %}#}
+{#                    <li>#}
+{#                        <strong>Product:</strong>{{ item.product.name }} <br>#}
+{#                        <strong>Quantity:</strong>{{ item.quantity }} <br>#}
+{#                        <strong>Product:</strong>{{ item.get_total }} <br>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
+{##}
+{#        <div class="order-total">#}
+{#            <h3>Total Items: {{ total_items }}</h3>#}
+{#            <h3>Total Price: {{ total_price }}</h3>#}
+{#        </div>#}
+{#{% endblock content %}#}
+
 {% extends 'shop/main.html' %}
 {% load static %}
 {% block content %}
-<!-- PRGRMR: ALIMURUNG -->
-        <div class="order-head">
-            <button class="yellow-button"><a href="{% url 'base:gallery' %}">Back</a></button>
-            <h1>Orders</h1>
-            <h2># {{ order.id }}</h2>
-            <p>Date Ordered: {{ order.date_ordered }}</p>
-            <p>Status: 
-                {% if order.complete %} 
-                    Complete 
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<style>
+    .order-head {
+        background-color: #ffc107;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px auto;
+        text-align: center;
+        max-width: 800px;
+        color: #333;
+    }
+
+    .order-head h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .order-head p {
+        margin: 5px 0;
+    }
+
+    .order-items {
+        background-color: #2b2e34;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 10px;
+        max-width: 800px;
+    }
+
+    .order-items h2 {
+        margin-bottom: 15px;
+    }
+
+    .order-items ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .order-items li {
+        background-color: #333;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .order-total {
+        background-color: #2b2e34;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 10px;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .order-total h3 {
+        margin: 10px 0;
+    }
+</style>
+<div class="listing-header">
+    <h1 style="font-weight: 900; text-align: center; padding-top: 10px">Buzz Purchases.</h1>
+</div>
+    <a href="{% url 'base:gallery' %}"><button class="yellow-button">Back</button></a>
+<div class="order-head">
+    <h2 style="font-weight: 700">Order # {{ order.id }}</h2>
+    <p>Date Ordered: {{ order.date_ordered }}</p>
+    <p>Status:
+        {% if order.complete %}
+            Complete
+        {% else %}
+            Pending
+        {% endif %}
+    </p>
+    <p>Transaction ID: {{ order.transaction_id }}</p>
+</div>
+
+<div class="order-items">
+    <h2 style="color: white; font-weight: 700">Order Items</h2>
+    <ul>
+        {% for item in order_items %}
+            <li>
+                <strong>Product:</strong> {{ item.product.name }} <br>
+                <strong>Quantity:</strong> {{ item.quantity }} <br>
+                <strong>Total:</strong> {{ item.get_total }} <br> <br>
+                {% if order.complete %}
+                    <h4 style="color: #ffc107; font-weight: 700">ORDER COMPLETED</h4>
                 {% else %}
-                    Pending
+                    <a href="#"><button class="yellow-button">Track Package</button></a>
                 {% endif %}
-            </p>
-            <p>Transaction ID: {{ order.transaction_id }}</p>
-        </div>
 
-        <div class="order-items">
-            <h2>Order Items</h2>
-            <ul>
-                {% for item in order_items %}
-                    <li>
-                        <strong>Product:</strong>{{ item.product.name }} <br>
-                        <strong>Quantity:</strong>{{ item.quantity }} <br>
-                        <strong>Product:</strong>{{ item.get_total }} <br>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 
-        <div class="order-total">
-            <h3>Total Items: {{ total_items }}</h3>
-            <h3>Total Price: {{ total_price }}</h3>
-        </div>
+<div class="order-total">
+    <h3 style="color: white; font-weight: 700">Total Items: {{ total_items }}</h3>
+    <h3 style="color: white; font-weight: 700">Total Price: {{ total_price }}</h3>
+</div>
+
 {% endblock content %}

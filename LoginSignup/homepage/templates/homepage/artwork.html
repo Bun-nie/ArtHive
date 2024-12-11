@@ -14,12 +14,10 @@
     <div class="view-container" style="height: 500px; display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 2fr 1fr 1fr;">
         <div class="left-panel" style="grid-column: 1 / 3; grid-row: 1 / -1; align-self: center; justify-self: center;">
             <img src="{{ artwork.image_url }}" alt="Magani Artwork" class="artwork" style="height: 350px;border-top: 1px solid #333333; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-            <div class="arrow arrow-left">&lt;</div>
-            <div class="arrow arrow-right">&gt;</div>
         </div>
         <div class="right-panel" style="grid-column: 3 / 5; grid-row: 1 / -1; background-color: #383838; padding: 20px; border-radius: 20px; align-self: center; justify-content: center; height: 100%; overflow-y: auto;">
             <div class="profile" style="display: flex;">
-                <img src="{{ artwork.user.profile_url }}" alt="Profile Picture" class="profile-picture" style="height: 50px; margin-right: 10px;">
+                <img src="{% if artwork.user.profile_url %}{{ artwork.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture" class="profile-picture" style="height: 50px; margin-right: 10px;">
                 <div class="profile-info">
                     <p class="profile-name" style="color: #FFFFFF; font-weight: 700">{{ artwork.user.first_name }} {{ artwork.user.last_name }}</p>
                     <p style="font-weight: 400; font-size: small; margin-top: -20px">@{{ artwork.user.username }}</p>
@@ -27,11 +25,12 @@
             </div>
             <h1 class="title" style="text-align: center; font-size: 40px; color: #FFFFFF">{{ artwork.artName }}</h1>
             <hr style="border-color: white; border-width: 3px">
-            <p class="description" style="height: 100px">{{ artwork.description }}</p>
+            <p class="description" style="height: 200px">{{ artwork.description }}</p>
             {% if artwork.user.id == user.id %}
                 <a href="{% url 'base:edit-artwork' artwork.pk %}">
-                    <button class="yellow-button" style="width: 100%;">Edit Artwork</button>
+                    <button class="yellow-button">Edit Artwork</button>
                 </a>
+                <button class="yellow-button" id="delete-artwork-btn">Delete Artwork</button>
             {% endif %}
             <hr style="border-color: white; border-width: 3px">
             <div class="social-stats" style="color: #FFFFFF; align-items: center; justify-content: space-evenly">
@@ -74,7 +73,7 @@
                                         <img src="{{ comment.comment_image.url }}" alt="Comment Image" id="comment-image-{{ comment.id }}">
                                     {% endif %}
                                 </div>
-                                {% if artwork.user.id == comment.user.id %}
+                                {% if comment.user.id == request.user.id %}
                                     <button class="edit-btn yellow-button" data-comment-id="{{ comment.id }}">Edit</button>
                                     <button class="delete-btn yellow-button" data-comment-id="{{ comment.id }}">Delete</button>
                                 {% else %}
@@ -87,4 +86,52 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButton = document.getElementById('delete-artwork-btn');
+        if (deleteButton) {
+            deleteButton.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to undo this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: 'red',
+                    confirmButtonText: 'Yes, delete it!',
+                    confirmButtonColor: '#FED154',
+                    customClass: 'swal-background',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/homepage/artwork/delete/${artwork_pk}/`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRFToken': csrf_token,
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your artwork has been deleted.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.href = "{% url 'base:gallery' %}"; // Redirect to gallery
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    'There was a problem deleting your artwork.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    });
+</script>
+
 {% endblock content %}
