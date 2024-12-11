@@ -1,0 +1,8 @@
+asgiref
+Deprecated
+Django
+pillow
+sqlparse
+wrapt
+django-crispy-forms
+crispy-bootstrap4
