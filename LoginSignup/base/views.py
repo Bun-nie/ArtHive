@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm, LoginForm, CustomPasswordChangeForm
 from django.contrib import messages
 from shop.models import Order, Product
+from homepage.models import Category, Artwork
 from homepage.models import Artwork
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import get_user_model
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 
@@ -123,3 +125,22 @@ def change_password(request):
     return render(request, 'change_password.html', {'form': form})
 
 
+@login_required
+def admin_dashboard(request):
+    if not request.user.is_staff:
+        return HttpResponseForbidden("User is not admin")
+    else:
+        users = User.object.all()
+        categories = Category.objects.all()
+        artworks = Artwork.objects.all()
+        orders = Order.objects.all()
+
+        # Pass data to template
+        context = {
+            'users': users,
+            'categories': categories,
+            'artworks': artworks,
+            'orders':orders,
+        }
+
+        return render(request, 'honeycomb/admin-profile.html')

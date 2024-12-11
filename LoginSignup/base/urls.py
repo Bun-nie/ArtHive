@@ -15,6 +15,7 @@ urlpatterns = [
     path('password_change/', change_password, name='password_change'),
     path('settings/', profile_settings, name='profileSettings'),
     path('deactivate_account/', deactivate_account, name='deactivate_account'),
+    path('admin-profile', admin_dashboard, name='adminProfile'),
 ]
 
 # if settings.DEBUG:
