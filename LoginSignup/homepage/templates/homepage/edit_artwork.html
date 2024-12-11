@@ -1,0 +1,26 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="listing-header">
+        <h1 style="font-weight: 900; text-align: center; padding-top: 10px">Edit Artwork.</h1>
+    </div>
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="glow-container">
+            {{ form.artName }}
+        </div>
+        <div class="glow-container">
+            {{ form.description }}
+        </div>
+        <div class="glow-container">
+            {{ form.artwork }}
+        </div>
+        <button class="yellow-button" type="submit">Save Changes</button>
+        <a href="{% url 'base:view_artwork' artwork.pk %}">
+            <button class="yellow-button" type="submit">Cancel</button>
+        </a>
+        </form>
+    </div>
+
+{% endblock %}

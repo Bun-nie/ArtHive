@@ -1,5 +1,6 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Artwork
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -23,3 +24,31 @@ class CommentForm(forms.ModelForm):
 
     # Explicitly mark comment_image as optional if not handled at the model level
     comment_image = forms.ImageField(required=False)
+
+class ArtworkForm(forms.ModelForm):
+    class Meta:
+        model = Artwork
+        fields = ['artName', 'description', 'artwork']
+        widgets = {
+            'artName': forms.Textarea(
+                attrs={
+                    'class': 'input-field',
+                    'placeholder': 'Enter new Artname',
+                    'rows': 1,
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'input-field',
+                    'placeholder': 'Enter new Description',
+                    'rows': 1,
+                }
+            ),
+            'artwork': forms.ClearableFileInput(
+                attrs={
+                    'class': 'image-field',
+                    'placeholder': 'Add Image',
+                }
+            )
+        }
+

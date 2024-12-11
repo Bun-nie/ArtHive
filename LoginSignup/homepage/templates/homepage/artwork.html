@@ -3,117 +3,88 @@
 {% block content %}
     <script src="{% static 'js/comment-actions.js' %}"></script>
     <script>
-      var artwork_pk = '{{ artwork_pk }}'
+      var artwork_pk = '{{ artwork.pk }}'  <!-- Make sure artwork_pk is passed -->
       var csrf_token = '{{ csrf_token }}'
     </script>
-<a href="{% url 'base:gallery' %}">
-    <button class="yellow-button" style="align-self: center; justify-self: center">
-        &#x2190;&nbspContinue Exploring
-    </button>
-</a>
-  <div class="view-container" style="height: 500px; display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 2fr 1fr 1fr;">
-    <div class="left-panel" style="grid-column: 1 / 3; grid-row: 1 / -1; align-self: center; justify-self: center;">
-      <img src="{{ artwork.image_url }}" alt="Magani Artwork" class="artwork" style="height: 350px;border-top: 1px solid #333333; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-      <div class="arrow arrow-left">&lt;</div>
-      <div class="arrow arrow-right">&gt;</div>
-    </div>
-    <div class="right-panel" style="grid-column: 3 / 5; grid-row: 1 / -1; background-color: #383838; padding: 20px; border-radius: 20px; align-self: center; justify-content: center; height: 100%; overflow-y: auto; /* Enable vertical scrolling */
-           max-height: 80vh;
-           scrollbar-width: thin;
-           scrollbar-color: #555 #383838;">
-        <div class="profile" style="display: flex;">
-          <img src="{{ artwork.user.profile_url }}" alt="Profile Picture" class="profile-picture" style="height: 50px; margin-right: 10px;">
-          <div class="profile-info">
-            <p class="profile-name" style="color: #FFFFFF; font-weight: 700">{{ artwork.user.first_name }} {{ artwork.user.last_name }}</p>
-              <p style="font-weight: 400; font-size: small; margin-top: -20px">@{{ artwork.user.username }}</p>
-          </div>
+    <a href="{% url 'base:gallery' %}">
+        <button class="yellow-button" style="align-self: center; justify-self: center">
+            &#x2190;&nbspContinue Exploring
+        </button>
+    </a>
+    <div class="view-container" style="height: 500px; display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 2fr 1fr 1fr;">
+        <div class="left-panel" style="grid-column: 1 / 3; grid-row: 1 / -1; align-self: center; justify-self: center;">
+            <img src="{{ artwork.image_url }}" alt="Magani Artwork" class="artwork" style="height: 350px;border-top: 1px solid #333333; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+            <div class="arrow arrow-left">&lt;</div>
+            <div class="arrow arrow-right">&gt;</div>
         </div>
-      <h1 class="title" style="text-align: center; font-size: 40px; color: #FFFFFF">{{ artwork.artName }}</h1>
-        <hr style="border-color: white; border-width: 3px">
-      <p class="description" style="height: 100px">
-        {{ artwork.description }}
-      </p>
-        <hr style="border-color: white; border-width: 3px">
-      <div class="social-stats" style="color: #FFFFFF; align-items: center; justify-content: space-evenly">
-        <span class="likes">💧 228K</span>
-        <span class="comments">💬 28K</span>
-      </div>
-        <hr style="border-color: white; border-width: 3px">
-        <div class="container" style="color: white">
-            <form action="" method="POST" enctype="multipart/form-data">
-               {% csrf_token %}
-                <div class="glow-container">
-                    {{ form.comment_body }}
+        <div class="right-panel" style="grid-column: 3 / 5; grid-row: 1 / -1; background-color: #383838; padding: 20px; border-radius: 20px; align-self: center; justify-content: center; height: 100%; overflow-y: auto;">
+            <div class="profile" style="display: flex;">
+                <img src="{{ artwork.user.profile_url }}" alt="Profile Picture" class="profile-picture" style="height: 50px; margin-right: 10px;">
+                <div class="profile-info">
+                    <p class="profile-name" style="color: #FFFFFF; font-weight: 700">{{ artwork.user.first_name }} {{ artwork.user.last_name }}</p>
+                    <p style="font-weight: 400; font-size: small; margin-top: -20px">@{{ artwork.user.username }}</p>
                 </div>
-                <div class="glow-container">
-                    <input type="file" name="comment_image" class="image-field" placeholder="Add Image">
-                </div>
-                <button class="yellow-button" type="submit" style="width: 100%">Buzz</button>
-            </form>
-        <hr style="border-color: white; border-width: 3px">
-            {%  if not artwork.comments.exists %}
-                <p>No comments yet...</p>
-            {% else %}
-{#                <div class="comment-section">#}
-{#                    {% for comment in comments %}#}
-{#                        <div class="comment-card" id="comment-{{ comment.id }}">#}
-{#                            <div class="profile">#}
-{#                                <img src="{% if comment.user.profile_url %}{{ comment.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture">#}
-{#                                <div class="user-info">#}
-{#                                    <p class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>#}
-{#                                    <p class="username">@{{ comment.user.username }}</p>#}
-{#                                    <p class="username" style="font-size: 9px">{{ comment.date_create }}</p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="content">#}
-{#                                <p class="text" id="comment-body-{{ comment.id }}">{{ comment.comment_body }}</p>#}
-{#                                {% if comment.comment_image %}#}
-{#                                    <img src="{{ comment.comment_image.url }}" alt="Comment Image" id="comment-image-{{ comment.id }}">#}
-{#                                {% endif %}#}
-{#                            </div>#}
-{##}
-{#                            {% if artwork.user.id == comment.user.id %}#}
-{#                                <button class="edit-btn yellow-button" data-comment-id="{{ comment.id }}">Edit</button>#}
-{#                                <button class="delete-btn yellow-button" data-comment-id="{{ comment.id }}">Delete</button>#}
-{#                            {% else %}#}
-{#                                <a href="#"><button class="yellow-button">Report</button></a>#}
-{#                            {% endif %}#}
-{#                        </div>#}
-{#                    {% endfor %}#}
-{#                </div>#}
-                <div class="comment-section">
-                    {% for comment in comments %}
-                        <div class="comment-card" id="comment-{{ comment.id }}">
-                            <div class="profile">
-                                <img src="{% if comment.user.profile_url %}{{ comment.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture">
-                                <div class="user-info">
-                                    <p class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
-                                    <p class="username">@{{ comment.user.username }}</p>
-                                    <p class="username" style="font-size: 9px">{{ comment.date_create }}</p>
+            </div>
+            <h1 class="title" style="text-align: center; font-size: 40px; color: #FFFFFF">{{ artwork.artName }}</h1>
+            <hr style="border-color: white; border-width: 3px">
+            <p class="description" style="height: 100px">{{ artwork.description }}</p>
+            {% if artwork.user.id == user.id %}
+                <a href="{% url 'base:edit-artwork' artwork.pk %}">
+                    <button class="yellow-button" style="width: 100%;">Edit Artwork</button>
+                </a>
+            {% endif %}
+            <hr style="border-color: white; border-width: 3px">
+            <div class="social-stats" style="color: #FFFFFF; align-items: center; justify-content: space-evenly">
+                <span class="likes">💧 228K</span>
+                <span class="comments">💬 28K</span>
+            </div>
+            <hr style="border-color: white; border-width: 3px">
+
+
+
+            <div class="container" style="color: white">
+                <form action="" method="POST" enctype="multipart/form-data">
+                   {% csrf_token %}
+                    <div class="glow-container">
+                        {{ form.comment_body }}
+                    </div>
+                    <div class="glow-container">
+                        <input type="file" name="comment_image" class="image-field" placeholder="Add Image">
+                    </div>
+                    <button class="yellow-button" type="submit" style="width: 100%">Buzz</button>
+                </form>
+            <hr style="border-color: white; border-width: 3px">
+                {% if not artwork.comments.exists %}
+                    <p>No comments yet...</p>
+                {% else %}
+                    <div class="comment-section">
+                        {% for comment in comments %}
+                            <div class="comment-card" id="comment-{{ comment.id }}">
+                                <div class="profile">
+                                    <img src="{% if comment.user.profile_url %}{{ comment.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture">
+                                    <div class="user-info">
+                                        <p class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
+                                        <p class="username">@{{ comment.user.username }}</p>
+                                        <p class="username" style="font-size: 9px">{{ comment.date_create }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content">
-                                <p class="text" id="comment-body-{{ comment.id }}">{{ comment.comment_body }}</p>
-                                {% if comment.comment_image %}
-                                    <img src="{{ comment.comment_image.url }}" alt="Comment Image" id="comment-image-{{ comment.id }}">
+                                <div class="content">
+                                    <p class="text" id="comment-body-{{ comment.id }}">{{ comment.comment_body }}</p>
+                                    {% if comment.comment_image %}
+                                        <img src="{{ comment.comment_image.url }}" alt="Comment Image" id="comment-image-{{ comment.id }}">
+                                    {% endif %}
+                                </div>
+                                {% if artwork.user.id == comment.user.id %}
+                                    <button class="edit-btn yellow-button" data-comment-id="{{ comment.id }}">Edit</button>
+                                    <button class="delete-btn yellow-button" data-comment-id="{{ comment.id }}">Delete</button>
+                                {% else %}
+                                    <a href="#"><button class="yellow-button">Report</button></a>
                                 {% endif %}
                             </div>
-
-                            {% if artwork.user.id == comment.user.id %}
-                                <button class="edit-btn yellow-button" data-comment-id="{{ comment.id }}">Edit</button>
-                                <button class="delete-btn yellow-button" data-comment-id="{{ comment.id }}">Delete</button>
-                            {% else %}
-                                <a href="#"><button class="yellow-button">Report</button></a>
-                            {% endif %}
-
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-  </div>
-
 {% endblock content %}

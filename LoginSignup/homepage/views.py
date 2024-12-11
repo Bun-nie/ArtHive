@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Artwork, Comment
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm
+from .forms import CommentForm, ArtworkForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
@@ -119,3 +119,20 @@ def deleteComment(request, pk):
         return JsonResponse({'status': 'success', 'message': 'Comment deleted successfully'})
 
     return JsonResponse({'status': 'error', 'message': 'Unauthorized action'}, status=403)
+
+def edit_artwork(request, pk):
+    artwork = get_object_or_404(Artwork, pk=pk)
+
+    # Check if the logged-in user is the owner
+    if request.user != artwork.user:
+        return redirect('base:gallery')  # or any other page, maybe a 403 forbidden
+
+    if request.method == 'POST':
+        form = ArtworkForm(request.POST, request.FILES, instance=artwork)
+        if form.is_valid():
+            form.save()
+            return redirect('base:view_artwork', pk=artwork.pk)
+    else:
+        form = ArtworkForm(instance=artwork)
+
+    return render(request, 'homepage/edit_artwork.html', {'form': form, 'artwork': artwork})
