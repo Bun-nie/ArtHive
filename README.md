@@ -195,7 +195,7 @@ The project is built using the following libraries/frameworks:
    ```
 2. Navigate to the project directory
    ```sh
-   cd IntelliForums
+   cd ArtHive
    ```
 3. Create a virtual environment
    ```sh
