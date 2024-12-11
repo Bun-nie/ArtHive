@@ -57,7 +57,16 @@ def viewOrderTrack(request):
 
     return render(request, 'honeycomb/order-track.html', context)
 
-
+@login_required
+def deactivate_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.is_active = False
+        user.save()
+        from django.contrib.auth import logout
+        logout(request)
+        return redirect('/')
+    return render(request, 'profile-settings.html')
 
 # for authorization
 def authView(request):

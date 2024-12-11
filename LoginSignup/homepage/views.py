@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Artwork, Comment
 from django.contrib.auth.decorators import login_required
@@ -22,30 +23,35 @@ def gallery(request):
 
 @login_required(login_url='login')
 def viewArtwork(request, pk):
-    artwork = Artwork.objects.get(id=pk) # for the artwork field view
+    # artwork = Artwork.objects.get(id=pk) # for the artwork field view
+    artwork = get_object_or_404(Artwork, id=pk)
 
     # for the comments
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
 
         if form.is_valid():
-            comment_body = form.save(commit=False)
-            comment_body.user = get_object_or_404(User, id=request.user.id)
+            comment = form.save(commit=False)
+            comment.user = request.user
             # naa diri ang bug about sa ID
-            comment_body.artwork_ref = get_object_or_404(Artwork, id=pk)
-            comment_body.save()
+            comment.artwork_ref = artwork
+            comment.save()
+            form = CommentForm()
         else:
-            raise ValidationError("Incorrect data. No ID")
-        
+            # raise ValidationError("Incorrect data. No ID")
+            form.add_error(None, "Incorrect data provided.")
+
     else:
         form = CommentForm()
 
+    comments = Comment.objects.filter(artwork_ref=artwork)
+
     return render(request, 'homepage/artwork.html', {
         'artwork': artwork,
-        'comment_body' : Comment.objects.filter(artwork_ref__id=pk),
-        'form': form
+        'comments': comments,
+        'form': form,
+        'artwork_pk': artwork.id
         })
-    # until here ang bug
 
 @login_required(login_url='login')
 def addArtwork(request):
@@ -83,3 +89,33 @@ def addArtwork(request):
 
     context = {'categories': categories}
     return render(request, 'homepage/add.html', context)
+
+# View for editing comment
+@login_required(login_url='login')
+def editComment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if request.user == comment.user:
+        if request.method == 'POST':
+            comment_body = request.POST.get('comment_body', '')
+            comment_image = request.FILES.get('comment_image')
+
+            comment.comment_body = comment_body
+            if comment_image:
+                comment.comment_image = comment_image
+            comment.save()
+
+            return JsonResponse({'status': 'success', 'comment_body': comment.comment_body, 'comment_image_url': comment.comment_image.url if comment.comment_image else None})
+
+    return JsonResponse({'status': 'error', 'message': 'Unauthorized action'}, status=403)
+
+# View for deleting comment
+@login_required(login_url='login')
+def deleteComment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if request.user == comment.user:
+        comment.delete()
+        return JsonResponse({'status': 'success', 'message': 'Comment deleted successfully'})
+
+    return JsonResponse({'status': 'error', 'message': 'Unauthorized action'}, status=403)

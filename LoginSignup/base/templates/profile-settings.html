@@ -1,10 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'shop/main.html' %}
 {% load static %}
 {% block content %}
     <div class="settings-section">
         <a href="{% url 'password_change' %}">
-            <i class='bx bxs-cog'></i>
-            <span class="text">Change Password</span>
+{#            <i class='bx bxs-cog'></i>#}
+            <button class="yellow-button">Change Password</button>
         </a>
     </div>
+    <br>
+    <div class="settings-section">
+        <button id="deactivate-button" class="yellow-button">
+            <i class='bx bxs-user-x'></i>
+            <span class="text">Deactivate Account</span>
+        </button>
+
+        <form id="deactivate-form" action="{% url 'deactivate_account' %}" method="POST" style="display: none;">
+            {% csrf_token %}
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('deactivate-button').addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Deactivating your account will disable access until reactivated by support.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1E2329',
+                cancelButtonColor: '#ffd700',
+                confirmButtonText: 'Yes, deactivate!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deactivate-form').submit(); // Submit the hidden form
+                }
+            });
+        });
+    </script>
 {% endblock content %}

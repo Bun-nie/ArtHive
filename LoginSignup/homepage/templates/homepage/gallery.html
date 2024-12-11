@@ -44,7 +44,7 @@
                             <a href="{% url 'base:view_artwork' pk=artwork.id %}" class="btn btn-sm m-1">
                                 <div class="card" style="height: 300px; width: 200px; border-radius: 20px">
                                     <div class="card-header" style="display: flex; align-items: center;">
-                                        <img src="{{ artwork.user.profile_url }}" alt="Profile Picture"
+                                        <img src="{% if artwork.user.profile_url %}{{ artwork.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture"
                                              class="profile-picture"
                                              style="object-fit: cover; height: 40px; width: 40px; border-radius: 50%;">
                                         <div class="profile-info" style="margin-left: 0px;">

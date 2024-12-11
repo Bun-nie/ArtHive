@@ -1,14 +1,11 @@
 {% extends 'shop/main.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magani Artwork</title>
-</head>
-<body>
+    <script src="{% static 'js/comment-actions.js' %}"></script>
+    <script>
+      var artwork_pk = '{{ artwork_pk }}'
+      var csrf_token = '{{ csrf_token }}'
+    </script>
 <a href="{% url 'base:gallery' %}">
     <button class="yellow-button" style="align-self: center; justify-self: center">
         &#x2190;&nbspContinue Exploring
@@ -22,7 +19,10 @@
       <div class="arrow arrow-left">&lt;</div>
       <div class="arrow arrow-right">&gt;</div>
     </div>
-    <div class="right-panel" style="grid-column: 3 / 5; grid-row: 1 / -1; background-color: #383838; padding: 20px; border-radius: 20px; align-self: center; justify-content: center; height: 100%">
+    <div class="right-panel" style="grid-column: 3 / 5; grid-row: 1 / -1; background-color: #383838; padding: 20px; border-radius: 20px; align-self: center; justify-content: center; height: 100%; overflow-y: auto; /* Enable vertical scrolling */
+           max-height: 80vh;
+           scrollbar-width: thin;
+           scrollbar-color: #555 #383838;">
         <div class="profile" style="display: flex;">
           <img src="{{ artwork.user.profile_url }}" alt="Profile Picture" class="profile-picture" style="height: 50px; margin-right: 10px;">
           <div class="profile-info">
@@ -42,72 +42,78 @@
       </div>
         <hr style="border-color: white; border-width: 3px">
         <div class="container" style="color: white">
-            <h2>Comments</h2>
-            {% if not arwork.comments.all %}
-              No comments yet...
-              <!-- if there are existing comments -->
-            {% else %}
-              <div class="comment-section">
-                {% for comment in artwork.comments.all %}
-                  <div class="container">
-                    <div>
-                      <!-- redirect to profile if photo/name is pressed -->
-                       <!-- double underscore: the values from the tables -->
-                      <img src="profile_picturemedia/{{ comment.user__picture }}" alt="{{ comment.user__username }}" onclick="window.location.href='profile/{{ comment.user__id }}'">
-                      <h5 class="user-username-card" onclick="window.location.href='{profile/{{ comment.user__id }}'">{{ comment.user.username }}</h5>
-                      <h6 class="date-subtitle">{{ comment.date_created }}</h6>
-                    </div>
-                    <div>
-                      <!-- if user wants to edit, delete, or report other comments -->
-                      {% if user_ref.id == comment.user_ref__id %}
-                        <a href="#">
-                            <button class="yellow-button">
-                                Edit
-                            </button>
-                        </a>
-                        <a href="#">
-                            <button class="yellow-button">
-                                Delete
-                            </button>
-                        </a>
-                      {% else %}
-                          <a href="#">Report</a>    
-                      {% endif %}
-                    </div>
-                    <!-- end of showing comments -->
-                  </div>
-                  <p class="text">{{ comment.comment_body }}</p>
-                  {% if comment.image %}
-                            <img src="commentmedia/{{ comment.image }}" alt="image">
-                  {% endif %}
-                {% endfor %}
-              </div>
-            {% endif %}
-            <!-- create a comment -->
-            <div class="create-comment">
-              <h2>Buzz around...</h2>
-              <form action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                  {{ form.non_field_errors }}
-                  <div class="comment-form-group">
-                    {{ form.comment_body.label_tag }}
+            <form action="" method="POST" enctype="multipart/form-data">
+               {% csrf_token %}
+                <div class="glow-container">
                     {{ form.comment_body }}
-                  </div>
-                  <div class="comment-form-group">
-                    {{ form.comment_image.label_tag }}
-                    {{ form.comment_image }}
-                  </div>
-                <button class="yellow-button" type="submit">Buzz</button>
-              </form>
-            </div>
+                </div>
+                <div class="glow-container">
+                    <input type="file" name="comment_image" class="image-field" placeholder="Add Image">
+                </div>
+                <button class="yellow-button" type="submit" style="width: 100%">Buzz</button>
+            </form>
+        <hr style="border-color: white; border-width: 3px">
+            {%  if not artwork.comments.exists %}
+                <p>No comments yet...</p>
+            {% else %}
+{#                <div class="comment-section">#}
+{#                    {% for comment in comments %}#}
+{#                        <div class="comment-card" id="comment-{{ comment.id }}">#}
+{#                            <div class="profile">#}
+{#                                <img src="{% if comment.user.profile_url %}{{ comment.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture">#}
+{#                                <div class="user-info">#}
+{#                                    <p class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>#}
+{#                                    <p class="username">@{{ comment.user.username }}</p>#}
+{#                                    <p class="username" style="font-size: 9px">{{ comment.date_create }}</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="content">#}
+{#                                <p class="text" id="comment-body-{{ comment.id }}">{{ comment.comment_body }}</p>#}
+{#                                {% if comment.comment_image %}#}
+{#                                    <img src="{{ comment.comment_image.url }}" alt="Comment Image" id="comment-image-{{ comment.id }}">#}
+{#                                {% endif %}#}
+{#                            </div>#}
+{##}
+{#                            {% if artwork.user.id == comment.user.id %}#}
+{#                                <button class="edit-btn yellow-button" data-comment-id="{{ comment.id }}">Edit</button>#}
+{#                                <button class="delete-btn yellow-button" data-comment-id="{{ comment.id }}">Delete</button>#}
+{#                            {% else %}#}
+{#                                <a href="#"><button class="yellow-button">Report</button></a>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+                <div class="comment-section">
+                    {% for comment in comments %}
+                        <div class="comment-card" id="comment-{{ comment.id }}">
+                            <div class="profile">
+                                <img src="{% if comment.user.profile_url %}{{ comment.user.profile_url }}{% else %}{% static 'profile-pictures/default.png' %}{% endif %}" alt="Profile Picture">
+                                <div class="user-info">
+                                    <p class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</p>
+                                    <p class="username">@{{ comment.user.username }}</p>
+                                    <p class="username" style="font-size: 9px">{{ comment.date_create }}</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <p class="text" id="comment-body-{{ comment.id }}">{{ comment.comment_body }}</p>
+                                {% if comment.comment_image %}
+                                    <img src="{{ comment.comment_image.url }}" alt="Comment Image" id="comment-image-{{ comment.id }}">
+                                {% endif %}
+                            </div>
+
+                            {% if artwork.user.id == comment.user.id %}
+                                <button class="edit-btn yellow-button" data-comment-id="{{ comment.id }}">Edit</button>
+                                <button class="delete-btn yellow-button" data-comment-id="{{ comment.id }}">Delete</button>
+                            {% else %}
+                                <a href="#"><button class="yellow-button">Report</button></a>
+                            {% endif %}
+
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
   </div>
-</body>
-<script>
-  var artwork_pk = '{{ artwork_pk }}'
-  var csrf_token = '{{ csrf_token }}'
-</script>
-</html>
 
 {% endblock content %}
