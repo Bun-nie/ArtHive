@@ -1,5 +1,3 @@
-![462643643_564492322880165_1099868836382306464_n](https://github.com/user-attachments/assets/ed757cac-3d44-4e03-97cf-d7990561e373)<a id="readme-top"></a>
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -135,11 +133,8 @@ The project is built using the following libraries/frameworks:
 <!--  Entity-Relationship Diagram (ERD) 🗂️ -->
 
 ## Entity-Relationship Diagram (ERD) 🗂️
+![462643643_564492322880165_1099868836382306464_n](https://github.com/user-attachments/assets/94053990-7c17-44b4-86e6-44dd3898813a)
 
-<a href="">
-![462643643_564492322880165_1099868836382306464_n](https://github.com/user-attachments/assets/2ebb0163-ad31-4704-82e3-8cb9a9f48fe4)
-
-</a>
 
 <div align="right">
     <a href="#readme-top">
